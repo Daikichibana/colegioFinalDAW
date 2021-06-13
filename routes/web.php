@@ -53,3 +53,21 @@ Route::get('/inscripcion/obtenerDetalles',[App\Http\Controllers\InscripcionContr
 Route::get('/inscripcion/obtenerCabecera',[App\Http\Controllers\InscripcionController::class, 'obtenerCabecera']);
 //Route::get('/frmbuscarcurso', [App\Http\Controllers\AsignacionCursoGestionController::class, 'index']);
 //Route::get('/frmbuscarnotas', [App\Http\Controllers\NotaController::class, 'index']);
+
+//Gestion
+Route::get('/gestion',[App\Http\Controllers\GestionController::class, 'index']);
+Route::post('/gestion/registrar',[App\Http\Controllers\GestionController::class, 'store']);
+Route::put('/gestion/modificar',[App\Http\Controllers\GestionController::class, 'update']);
+Route::put('/gestion/eliminar',[App\Http\Controllers\GestionController::class, 'delete']);
+
+//Curso
+Route::get('/curso',[App\Http\Controllers\CursoController::class, 'index']);
+Route::post('/curso/registrar',[App\Http\Controllers\CursoController::class, 'store']);
+Route::put('/curso/modificar',[App\Http\Controllers\CursoController::class, 'update']);
+Route::put('/curso/eliminar',[App\Http\Controllers\CursoController::class, 'delete']);
+
+//Aula
+Route::get('/aula',[App\Http\Controllers\AulaController::class, 'index']);
+Route::post('/aula/registrar',[App\Http\Controllers\AulaController::class, 'store']);
+Route::put('/aula/modificar',[App\Http\Controllers\AulaController::class, 'update']);
+Route::put('/aula/eliminar',[App\Http\Controllers\AulaController::class, 'delete']);
