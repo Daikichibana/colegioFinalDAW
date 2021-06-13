@@ -132,7 +132,7 @@
                     </template>
                     <template v-if="menu==6">
                         <!-- -->
-                        <frmusuarios></frmusuarios>
+                        <frmusuarios></frmusuarios> 
                     </template>
                     <template v-if="menu==7">
                         <!-- -->

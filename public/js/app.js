@@ -3316,8 +3316,151 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  mounted: function mounted() {}
+  data: function data() {
+    return {
+      id: 0,
+      username: "",
+      password: "",
+      rol: "",
+      buscar: "",
+      arrayusers: []
+    };
+  },
+  methods: {
+    listar: function listar(buscar) {
+      var me = this;
+      var url = "/users?buscar=" + buscar;
+      axios.get(url).then(function (response) {
+        me.arrayusers = response.data;
+        console.log(me.arrayusers);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    guardar: function guardar() {
+      var me = this;
+      console.log(this.password);
+      console.log(this.username);
+      console.log(this.rol);
+      axios.post("users/registrar", {
+        username: this.username,
+        password: this.password,
+        rol: this.rol
+      }).then(function (error) {
+        me.listar("");
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    modificar: function modificar() {
+      var me = this;
+      axios.put("users/modificar", {
+        username: this.username,
+        password: this.password,
+        rol: this.rol,
+        id: this.id
+      }).then(function (error) {
+        me.listar("");
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    eliminar: function eliminar() {
+      var me = this;
+      axios.put("users/eliminar", {
+        id: this.id
+      }).then(function (error) {
+        me.listar("");
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    llenar: function llenar() {
+      var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+      this.id = data["id"];
+      this.username = data["username"];
+      this.password = data["password"];
+      this.rol = data["rol"];
+    },
+    nuevo: function nuevo() {
+      this.username = "";
+      this.password = "";
+      this.direccion = "";
+      this.rol = "";
+      this.buscar = "";
+    }
+  },
+  mounted: function mounted() {
+    this.listar("");
+  }
 });
 
 /***/ }),
@@ -42775,18 +42918,265 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("h1", [_vm._v("Usuarios")])
+  return _c("center", [
+    _c("div", { staticClass: "container" }, [
+      _c("br"),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("h3", [_vm._v("Gestion de Usuarios")]),
+      _vm._v(" "),
+      _c("form", { attrs: { action: "", method: "$POST" } }, [
+        _c("table", [
+          _c("tr", [
+            _c("td", [_vm._v("username")]),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.username,
+                    expression: "username"
+                  }
+                ],
+                attrs: { type: "text", placeholder: "username" },
+                domProps: { value: _vm.username },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.username = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v("password")]),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.password,
+                    expression: "password"
+                  }
+                ],
+                attrs: { type: "text", placeholder: "password" },
+                domProps: { value: _vm.password },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.password = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v("rol")]),
+            _vm._v(" "),
+            _c("td", [
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.rol,
+                      expression: "rol"
+                    }
+                  ],
+                  attrs: { placeholder: "rol" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.rol = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
+                  }
+                },
+                [
+                  _c("option", { attrs: { value: "Administrador" } }, [
+                    _vm._v("Administrador")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "Estudiante" } }, [
+                    _vm._v("Estudiante")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "Profesor" } }, [
+                    _vm._v("Profesor")
+                  ])
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", { attrs: { colspan: "3" } }, [
+              _c("br"),
+              _vm._v(" "),
+              _c("br"),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.nuevo()
+                    }
+                  }
+                },
+                [_vm._v("Nuevo")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.guardar()
+                    }
+                  }
+                },
+                [_vm._v("Guardar")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.modificar()
+                    }
+                  }
+                },
+                [_vm._v("Modificar")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.eliminar()
+                    }
+                  }
+                },
+                [_vm._v("Eliminar")]
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.buscar,
+              expression: "buscar"
+            }
+          ],
+          attrs: { type: "text", placeholder: "username" },
+          domProps: { value: _vm.buscar },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.buscar = $event.target.value
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                return _vm.listar(_vm.buscar)
+              }
+            }
+          },
+          [_vm._v("\n        Buscar por username\n      ")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("table", { attrs: { border: "1" } }, [
+        _c("thead", [
+          _c("th", [_vm._v("id")]),
+          _vm._v(" "),
+          _c("th", [_vm._v("username")]),
+          _vm._v(" "),
+          _c("th", [_vm._v("rol")]),
+          _vm._v(" "),
+          _c("th", [_vm._v("Opcion")])
+        ]),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          _vm._l(_vm.arrayusers, function(users) {
+            return _c("tr", { key: users.id }, [
+              _c("td", { domProps: { textContent: _vm._s(users.id) } }),
+              _vm._v(" "),
+              _c("td", { domProps: { textContent: _vm._s(users.username) } }),
+              _vm._v(" "),
+              _c("td", { domProps: { textContent: _vm._s(users.rol) } }),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "a",
+                  {
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        return _vm.llenar(users)
+                      }
+                    }
+                  },
+                  [_vm._v("Seleccionar")]
+                )
+              ])
+            ])
+          }),
+          0
+        )
+      ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 

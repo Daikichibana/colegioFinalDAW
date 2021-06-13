@@ -37,6 +37,13 @@ Route::post('/materia/registrar',[App\Http\Controllers\MateriaController::class,
 Route::put('/materia/modificar',[App\Http\Controllers\MateriaController::class, 'update']);
 Route::put('/materia/eliminar',[App\Http\Controllers\MateriaController::class, 'delete']);
 
+//Users
+Route::get('/users',[App\Http\Controllers\UserController::class, 'index']);
+Route::post('/users/registrar',[App\Http\Controllers\UserController::class, 'store']);
+Route::put('/users/modificar',[App\Http\Controllers\UserController::class, 'update']);
+Route::put('/users/eliminar',[App\Http\Controllers\UserController::class, 'delete']);
+
+
 //Inscripcion
 Route::get('/inscripcion',[App\Http\Controllers\InscripcionController::class, 'index']);
 Route::post('/inscripcion/registrar',[App\Http\Controllers\InscripcionController::class, 'store']);
