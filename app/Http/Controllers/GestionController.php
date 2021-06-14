@@ -20,6 +20,17 @@ class GestionController extends Controller
         
         return $Gestion;
     }
+    public function index2(Request $request){
+        $buscar= $request->buscar;
+        if($buscar==''){
+            $Gestion=Gestion::all();
+        }
+        else{
+            $Gestion=Gestion::where('id','=',$buscar)->get();
+        }
+        
+        return $Gestion;
+    }
 
     public function store(Request $request){
         $Gestion = new Gestion;
