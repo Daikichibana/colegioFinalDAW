@@ -51,7 +51,7 @@ Route::put('/inscripicion/modificar',[App\Http\Controllers\InscripcionController
 Route::put('/inscripcion/eliminar',[App\Http\Controllers\InscripcionController::class, 'delete']);
 Route::get('/inscripcion/obtenerDetalles',[App\Http\Controllers\InscripcionController::class, 'obtenerDetalles']);
 Route::get('/inscripcion/obtenerCabecera',[App\Http\Controllers\InscripcionController::class, 'obtenerCabecera']);
-//Route::get('/frmbuscarcurso', [App\Http\Controllers\AsignacionCursoGestionController::class, 'index']);
+Route::get('/frmbuscarcurso', [App\Http\Controllers\AsignacionCursoGestionController::class, 'index']);
 //Route::get('/frmbuscarnotas', [App\Http\Controllers\NotaController::class, 'index']);
 
 //Gestion
