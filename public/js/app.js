@@ -1874,8 +1874,154 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  mounted: function mounted() {}
+  data: function data() {
+    return {
+      id: 0,
+      nombre: '',
+      apellido: '',
+      telefono: '',
+      direccion: '',
+      fechaNacimiento: '',
+      buscar: '',
+      arrayApoderado: []
+    };
+  },
+  methods: {
+    listar: function listar(buscar) {
+      var me = this;
+      var url = '/apoderado?buscar=' + buscar;
+      axios.get(url).then(function (response) {
+        me.arrayApoderado = response.data;
+      })["catch"](function (error) {
+        console: log(error);
+      });
+    },
+    guardar: function guardar() {
+      var me = this;
+      axios.post('apoderado/registrar', {
+        'nombre': this.nombre,
+        'apellido': this.apellido,
+        'telefono': this.telefono,
+        'direccion': this.direccion,
+        'fechaNacimiento': this.fechaNacimiento
+      }).then(function (error) {
+        me.listar('');
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    modificar: function modificar() {
+      var me = this;
+      axios.put('apoderado/modificar', {
+        'nombre': this.nombre,
+        'apellido': this.apellido,
+        'telefono': this.telefono,
+        'direccion': this.direccion,
+        'fechaNacimiento': this.fechaNacimiento,
+        'id': this.id
+      }).then(function (error) {
+        me.listar('');
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    eliminar: function eliminar() {
+      var me = this;
+      axios.put('apoderado/eliminar', {
+        'id': this.id
+      }).then(function (error) {
+        me.listar('');
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    llenar: function llenar() {
+      var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+      this.id = data['id'];
+      this.nombre = data['nombre'];
+      this.apellido = data['apellido'];
+      this.telefono = data['telefono'];
+      this.direccion = data['direccion'];
+      this.fechaNacimiento = data['fechaNacimiento'];
+    },
+    nuevo: function nuevo() {
+      this.nombre = '';
+      this.apellido = '';
+      this.telefono = '';
+      this.direccion = '';
+      this.fechaNacimiento = '';
+      this.buscar = '';
+    }
+  },
+  mounted: function mounted() {
+    this.listar('');
+  }
 });
 
 /***/ }),
@@ -2657,8 +2803,135 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  mounted: function mounted() {}
+  data: function data() {
+    return {
+      id: 0,
+      nombre: '',
+      apellido: '',
+      telefono: '',
+      buscar: '',
+      arrayDocente: []
+    };
+  },
+  methods: {
+    listar: function listar(buscar) {
+      var me = this;
+      var url = '/docente?buscar=' + buscar;
+      axios.get(url).then(function (response) {
+        me.arrayDocente = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    guardar: function guardar() {
+      var me = this;
+      axios.post('docente/registrar', {
+        'nombre': this.nombre,
+        'apellido': this.apellido,
+        'telefono': this.telefono
+      }).then(function (error) {
+        me.listar('');
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    modificar: function modificar() {
+      var me = this;
+      axios.put('docente/modificar', {
+        'nombre': this.nombre,
+        'apellido': this.apellido,
+        'telefono': this.telefono,
+        'id': this.id
+      }).then(function (error) {
+        me.listar('');
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    eliminar: function eliminar() {
+      var me = this;
+      axios.put('docente/eliminar', {
+        'id': this.id
+      }).then(function (error) {
+        me.listar('');
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    llenar: function llenar() {
+      var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+      this.id = data['id'];
+      this.nombre = data['nombre'];
+      this.apellido = data['apellido'];
+      this.telefono = data['telefono'];
+    },
+    nuevo: function nuevo() {
+      this.nombre = '';
+      this.apellido = '';
+      this.telefono = '';
+      this.buscar = '';
+    }
+  },
+  mounted: function mounted() {
+    this.listar('');
+  }
 });
 
 /***/ }),
@@ -2978,8 +3251,145 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  mounted: function mounted() {}
+  data: function data() {
+    return {
+      id: 0,
+      horaInicio: '',
+      horaFinalizacion: '',
+      dia: '',
+      buscar: '',
+      arrayHorario: []
+    };
+  },
+  methods: {
+    listar: function listar(buscar) {
+      var me = this;
+      var url = '/horario?buscar=' + buscar;
+      axios.get(url).then(function (response) {
+        me.arrayHorario = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    guardar: function guardar() {
+      var me = this;
+      axios.post('horario/registrar', {
+        'horaInicio': this.horaInicio,
+        'horaFinalizacion': this.horaFinalizacion,
+        'dia': this.dia,
+        'codTurno': this.codTurno
+      }).then(function (error) {
+        me.listar('');
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    modificar: function modificar() {
+      var me = this;
+      axios.put('horario/modificar', {
+        'horaInicio': this.horaInicio,
+        'horaFinalizacion': this.horaFinalizacion,
+        'dia': this.dia,
+        'codTurno': this.codTurno,
+        'id': this.id
+      }).then(function (error) {
+        me.listar('');
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    eliminar: function eliminar() {
+      var me = this;
+      axios.put('horario/eliminar', {
+        'id': this.id
+      }).then(function (error) {
+        me.listar('');
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    llenar: function llenar() {
+      var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+      this.id = data['id'];
+      this.horaInicio = data['horaInicio'];
+      this.horaFinalizacion = data['horaFinalizacion'];
+      this.dia = data['dia'];
+      this.codTurno = data['codTurno'];
+    },
+    nuevo: function nuevo() {
+      this.horaInicio = '';
+      this.horaFinalizacion = '';
+      this.dia = '';
+      this.codTurno = '';
+      this.buscar = '';
+    }
+  },
+  mounted: function mounted() {
+    this.listar('');
+  }
 });
 
 /***/ }),
@@ -41378,18 +41788,307 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("h1", [_vm._v("Apoderados")])
+  return _c("center", [
+    _c("div", { staticClass: "container" }, [
+      _c("h3", [_vm._v("Apoderado")]),
+      _vm._v(" "),
+      _c("form", { attrs: { action: "", method: "$POST" } }, [
+        _c("table", [
+          _c("tr", [
+            _c("td", [_vm._v("Nombre")]),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.nombre,
+                    expression: "nombre"
+                  }
+                ],
+                attrs: { type: "text", placeholder: "Nombre" },
+                domProps: { value: _vm.nombre },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.nombre = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v("Apellido")]),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.apellido,
+                    expression: "apellido"
+                  }
+                ],
+                attrs: { type: "text", placeholder: "Apellido" },
+                domProps: { value: _vm.apellido },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.apellido = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v("Telefono")]),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.telefono,
+                    expression: "telefono"
+                  }
+                ],
+                attrs: { type: "text", placeholder: "Telefono" },
+                domProps: { value: _vm.telefono },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.telefono = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v("Direccion")]),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.direccion,
+                    expression: "direccion"
+                  }
+                ],
+                attrs: { type: "text", placeholder: "Direccion" },
+                domProps: { value: _vm.direccion },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.direccion = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v("FechaNacimiento")]),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.fechaNacimiento,
+                    expression: "fechaNacimiento"
+                  }
+                ],
+                attrs: { type: "date", placeholder: "FechaNacimiento" },
+                domProps: { value: _vm.fechaNacimiento },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.fechaNacimiento = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", { attrs: { colspan: "3" } }, [
+              _c(
+                "button",
+                {
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.nuevo()
+                    }
+                  }
+                },
+                [_vm._v("Nuevo")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.guardar()
+                    }
+                  }
+                },
+                [_vm._v("Guardar")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.modificar()
+                    }
+                  }
+                },
+                [_vm._v("Modificar")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.eliminar()
+                    }
+                  }
+                },
+                [_vm._v("Eliminar")]
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.buscar,
+              expression: "buscar"
+            }
+          ],
+          attrs: { type: "text", placeholder: "Nombre" },
+          domProps: { value: _vm.buscar },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.buscar = $event.target.value
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                return _vm.listar(_vm.buscar)
+              }
+            }
+          },
+          [_vm._v(" Buscar ")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("table", { attrs: { border: "3" } }, [
+        _c("thead", [
+          _c("th", [_vm._v("Id")]),
+          _vm._v(" "),
+          _c("th", [_vm._v("Nombre")]),
+          _vm._v(" "),
+          _c("th", [_vm._v("Apellido")]),
+          _vm._v(" "),
+          _c("th", [_vm._v("Telefono")]),
+          _vm._v(" "),
+          _c("th", [_vm._v("Direccion")]),
+          _vm._v(" "),
+          _c("th", [_vm._v("FechaNacimiento")]),
+          _vm._v(" "),
+          _c("th", [_vm._v("Opcion")])
+        ]),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          _vm._l(_vm.arrayApoderado, function(apoderado) {
+            return _c("tr", { key: apoderado.id }, [
+              _c("td", { domProps: { textContent: _vm._s(apoderado.id) } }),
+              _vm._v(" "),
+              _c("td", { domProps: { textContent: _vm._s(apoderado.nombre) } }),
+              _vm._v(" "),
+              _c("td", {
+                domProps: { textContent: _vm._s(apoderado.apellido) }
+              }),
+              _vm._v(" "),
+              _c("td", {
+                domProps: { textContent: _vm._s(apoderado.telefono) }
+              }),
+              _vm._v(" "),
+              _c("td", {
+                domProps: { textContent: _vm._s(apoderado.direccion) }
+              }),
+              _vm._v(" "),
+              _c("td", {
+                domProps: { textContent: _vm._s(apoderado.fechaNacimiento) }
+              }),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "a",
+                  {
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        return _vm.llenar(apoderado)
+                      }
+                    }
+                  },
+                  [_vm._v("Seleccionar")]
+                )
+              ])
+            ])
+          }),
+          0
+        )
+      ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -42607,18 +43306,247 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("h1", [_vm._v("Docentes")])
+  return _c("center", [
+    _c("div", { staticClass: "container" }, [
+      _c("br"),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("h3", [_vm._v(" Gestion de Docentes ")]),
+      _vm._v(" "),
+      _c("form", { attrs: { action: "", method: "$POST" } }, [
+        _c("table", [
+          _c("tr", [
+            _c("td", [_vm._v("Nombre")]),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.nombre,
+                    expression: "nombre"
+                  }
+                ],
+                attrs: { type: "text", placeholder: "Nombre Estudiante" },
+                domProps: { value: _vm.nombre },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.nombre = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v("Apellido")]),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.apellido,
+                    expression: "apellido"
+                  }
+                ],
+                attrs: { type: "text", placeholder: "Apellido" },
+                domProps: { value: _vm.apellido },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.apellido = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v("Telefono")]),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.telefono,
+                    expression: "telefono"
+                  }
+                ],
+                attrs: { type: "text", placeholder: "Telefono" },
+                domProps: { value: _vm.telefono },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.telefono = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", { attrs: { colspan: "3" } }, [
+              _c("br"),
+              _vm._v(" "),
+              _c("br"),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.nuevo()
+                    }
+                  }
+                },
+                [_vm._v("Nuevo")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.guardar()
+                    }
+                  }
+                },
+                [_vm._v("Guardar")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.modificar()
+                    }
+                  }
+                },
+                [_vm._v("Modificar")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.eliminar()
+                    }
+                  }
+                },
+                [_vm._v("Eliminar")]
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.buscar,
+              expression: "buscar"
+            }
+          ],
+          attrs: { type: "text", placeholder: "Nombre Docente" },
+          domProps: { value: _vm.buscar },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.buscar = $event.target.value
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                return _vm.listar(_vm.buscar)
+              }
+            }
+          },
+          [_vm._v("Buscar por Nombre")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("table", { attrs: { border: "2" } }, [
+        _c("thead", [
+          _c("th", [_vm._v("id")]),
+          _vm._v(" "),
+          _c("th", [_vm._v("Nombre")]),
+          _vm._v(" "),
+          _c("th", [_vm._v("Apellido")]),
+          _vm._v(" "),
+          _c("th", [_vm._v("Telefono")]),
+          _vm._v(" "),
+          _c("th", [_vm._v("Opcion")])
+        ]),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          _vm._l(_vm.arrayDocente, function(docente) {
+            return _c("tr", { key: docente.id }, [
+              _c("td", { domProps: { textContent: _vm._s(docente.id) } }),
+              _vm._v(" "),
+              _c("td", { domProps: { textContent: _vm._s(docente.nombre) } }),
+              _vm._v(" "),
+              _c("td", { domProps: { textContent: _vm._s(docente.apellido) } }),
+              _vm._v(" "),
+              _c("td", { domProps: { textContent: _vm._s(docente.telefono) } }),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "a",
+                  {
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        return _vm.llenar(docente)
+                      }
+                    }
+                  },
+                  [_vm._v("Seleccionar")]
+                )
+              ])
+            ])
+          }),
+          0
+        )
+      ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -43201,18 +44129,282 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("h1", [_vm._v("Horarios")])
+  return _c("center", [
+    _c("div", { staticClass: "container" }, [
+      _c("br"),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("h3", [_vm._v(" Gestion de Horario ")]),
+      _vm._v(" "),
+      _c("form", { attrs: { action: "", method: "$POST" } }, [
+        _c("table", [
+          _c("tr", [
+            _c("td", [_vm._v("HoraInicio")]),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.horaInicio,
+                    expression: "horaInicio"
+                  }
+                ],
+                attrs: { type: "time", placeholder: "Hora Inicial" },
+                domProps: { value: _vm.horaInicio },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.horaInicio = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v("HoraFinalizacion")]),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.horaFinalizacion,
+                    expression: "horaFinalizacion"
+                  }
+                ],
+                attrs: { type: "time", placeholder: "Hora Finalizacion" },
+                domProps: { value: _vm.horaFinalizacion },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.horaFinalizacion = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v("Dia")]),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.dia,
+                    expression: "dia"
+                  }
+                ],
+                attrs: { type: "text", placeholder: "Dia" },
+                domProps: { value: _vm.dia },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.dia = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v("CodTurno")]),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.codTurno,
+                    expression: "codTurno"
+                  }
+                ],
+                attrs: { type: "text", placeholder: "CodTurno" },
+                domProps: { value: _vm.codTurno },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.codTurno = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", { attrs: { colspan: "3" } }, [
+              _c("br"),
+              _vm._v(" "),
+              _c("br"),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.nuevo()
+                    }
+                  }
+                },
+                [_vm._v("Nuevo")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.guardar()
+                    }
+                  }
+                },
+                [_vm._v("Guardar")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.modificar()
+                    }
+                  }
+                },
+                [_vm._v("Modificar")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.eliminar()
+                    }
+                  }
+                },
+                [_vm._v("Eliminar")]
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.buscar,
+              expression: "buscar"
+            }
+          ],
+          attrs: { type: "text", placeholder: "Horario" },
+          domProps: { value: _vm.buscar },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.buscar = $event.target.value
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                return _vm.listar(_vm.buscar)
+              }
+            }
+          },
+          [_vm._v("Buscar Horario")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("table", { attrs: { border: "1" } }, [
+        _c("thead", [
+          _c("th", [_vm._v("id")]),
+          _vm._v(" "),
+          _c("th", [_vm._v("HoraInicio")]),
+          _vm._v(" "),
+          _c("th", [_vm._v("HoraFinalizacion")]),
+          _vm._v(" "),
+          _c("th", [_vm._v("Dia")]),
+          _vm._v(" "),
+          _c("th", [_vm._v("CodTurno")]),
+          _vm._v(" "),
+          _c("th", [_vm._v("Opcion")])
+        ]),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          _vm._l(_vm.arrayHorario, function(horario) {
+            return _c("tr", { key: horario.id }, [
+              _c("td", { domProps: { textContent: _vm._s(horario.id) } }),
+              _vm._v(" "),
+              _c("td", {
+                domProps: { textContent: _vm._s(horario.horaInicio) }
+              }),
+              _vm._v(" "),
+              _c("td", {
+                domProps: { textContent: _vm._s(horario.horaFinalizacion) }
+              }),
+              _vm._v(" "),
+              _c("td", { domProps: { textContent: _vm._s(horario.dia) } }),
+              _vm._v(" "),
+              _c("td", { domProps: { textContent: _vm._s(horario.codTurno) } }),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "a",
+                  {
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        return _vm.llenar(horario)
+                      }
+                    }
+                  },
+                  [_vm._v("Seleccionar")]
+                )
+              ])
+            ])
+          }),
+          0
+        )
+      ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
