@@ -56,6 +56,7 @@ Route::get('/inscripcion/obtenerCabecera',[App\Http\Controllers\InscripcionContr
 
 //Gestion
 Route::get('/gestion',[App\Http\Controllers\GestionController::class, 'index']);
+Route::get('/gestion2',[App\Http\Controllers\GestionController::class, 'index2']);
 Route::post('/gestion/registrar',[App\Http\Controllers\GestionController::class, 'store']);
 Route::put('/gestion/modificar',[App\Http\Controllers\GestionController::class, 'update']);
 Route::put('/gestion/eliminar',[App\Http\Controllers\GestionController::class, 'delete']);
@@ -89,3 +90,10 @@ Route::get('/turno',[App\Http\Controllers\TurnoController::class, 'index']);
 Route::post('/turno/registrar',[App\Http\Controllers\TurnoController::class, 'store']);
 Route::put('/turno/modificar',[App\Http\Controllers\TurnoController::class, 'update']);
 Route::put('/turno/eliminar',[App\Http\Controllers\TurnoController::class, 'delete']);
+
+//Asignacion Curso Gestion
+
+Route::get('/asignacioncursogestion',[App\Http\Controllers\AsignacionGestionCursoController::class, 'index']);
+Route::post('/asignacioncursogestion/registrar',[App\Http\Controllers\AsignacionGestionCursoController::class, 'store']);
+Route::put('/asignacioncursogestion/modificar',[App\Http\Controllers\AsignacionGestionCursoController::class, 'update']);
+Route::put('/asignacioncursogestion/eliminar',[App\Http\Controllers\AsignacionGestionCursoController::class, 'delete']);

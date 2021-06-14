@@ -1943,8 +1943,180 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  mounted: function mounted() {}
+  data: function data() {
+    return {
+      hola: {},
+      id: 0,
+      gestion: '',
+      idGestion: 0,
+      curso: '',
+      idCurso: 0,
+      paralelo: '',
+      idParalelo: 0,
+      buscar: '',
+      buscarGestion: '',
+      buscarCurso: '',
+      buscarParalelo: '',
+      arrayAsignacion: [],
+      arrayCurso: [],
+      arrayGestion: [],
+      arrayParalelo: []
+    };
+  },
+  methods: {
+    listar: function listar(buscar) {
+      var me = this;
+      var url = '/asignacioncursogestion?buscar=' + buscar;
+      axios.get(url).then(function (response) {
+        me.arrayAsignacion = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    listarCurso: function listarCurso(buscarCurso) {
+      var me = this;
+      var url = '/curso?buscar=' + buscarCurso;
+      axios.get(url).then(function (response) {
+        me.arrayCurso = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    listarGestion: function listarGestion(buscarGestion) {
+      var me = this;
+      var url = '/gestion2?buscar=' + buscarGestion;
+      axios.get(url).then(function (response) {
+        me.arrayGestion = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    listarParalelo: function listarParalelo(buscarParalelo) {
+      var me = this;
+      var url = '/paralelo?buscar=' + buscarParalelo;
+      axios.get(url).then(function (response) {
+        me.arrayParalelo = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    guardar: function guardar() {
+      var me = this;
+      axios.post('asignacioncursogestion/registrar', {
+        'codCurso': this.curso,
+        'codGestion': this.gestion,
+        'codParalelo': this.paralelo
+      }).then(function (error) {
+        me.listar('');
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    modificar: function modificar() {
+      var me = this;
+      axios.put('asignacioncursogestion/modificar', {
+        'codCurso': this.curso,
+        'codGestion': this.gestion,
+        'codParalelo': this.paralelo,
+        'id': this.id
+      }).then(function (error) {
+        me.listar('');
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    eliminar: function eliminar() {
+      var me = this;
+      axios.put('asignacioncursogestion/eliminar', {
+        'id': this.id
+      }).then(function (error) {
+        me.listar('');
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    nuevo: function nuevo() {
+      this.curso = '';
+      this.gestion = '';
+      this.paralelo = '';
+    },
+    llenar: function llenar() {
+      var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+      this.id = data['id'];
+      this.gestion = data['codGestion'];
+      this.curso = data['codCurso'];
+      this.paralelo = data['codParalelo'];
+    }
+  },
+  mounted: function mounted() {
+    this.listar('');
+    this.listarCurso('');
+    this.listarGestion('');
+    this.listarParalelo('');
+  }
 });
 
 /***/ }),
@@ -41308,15 +41480,309 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container" }, [
+    _c("br"),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("h3", [_vm._v("Asignar curso y gestion")]),
+    _vm._v(" "),
+    _c("form", { attrs: { action: "", method: "$POST" } }, [
+      _c("table", [
+        _c("tr", [
+          _c("td", [_vm._v(" Gestion ")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.gestion,
+                  expression: "gestion"
+                }
+              ],
+              attrs: { placeholder: "Gestion" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.gestion = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
+              }
+            },
+            _vm._l(_vm.arrayGestion, function(gestions) {
+              return _c(
+                "option",
+                { key: gestions.id, domProps: { value: gestions.id } },
+                [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(gestions.año) +
+                      " \n            "
+                  )
+                ]
+              )
+            }),
+            0
+          ),
+          _vm._v("\n            " + _vm._s(_vm.gestion) + "\n            ")
+        ]),
+        _vm._v(" "),
+        _c("tr", [
+          _c("td", [_vm._v(" Curso ")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.curso,
+                  expression: "curso"
+                }
+              ],
+              attrs: { placeholder: "Curso" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.curso = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
+              }
+            },
+            _vm._l(_vm.arrayCurso, function(cursos) {
+              return _c("option", {
+                key: cursos.id,
+                domProps: {
+                  value: cursos.id,
+                  textContent: _vm._s(cursos.nombre)
+                }
+              })
+            }),
+            0
+          )
+        ]),
+        _vm._v(" "),
+        _c("tr", [
+          _c("td", [_vm._v(" Paralelo ")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.paralelo,
+                  expression: "paralelo"
+                }
+              ],
+              attrs: { placeholder: "Paralelo" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.paralelo = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
+              }
+            },
+            _vm._l(_vm.arrayParalelo, function(paralelos) {
+              return _c("option", {
+                key: paralelos.id,
+                domProps: {
+                  value: paralelos.id,
+                  textContent: _vm._s(paralelos.nombre)
+                }
+              })
+            }),
+            0
+          )
+        ]),
+        _vm._v(" "),
+        _c("tr", [
+          _c("td", { attrs: { colspan: "3" } }, [
+            _c("br"),
+            _vm._v(" "),
+            _c("br"),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    return _vm.nuevo()
+                  }
+                }
+              },
+              [_vm._v("Nuevo")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    return _vm.guardar()
+                  }
+                }
+              },
+              [_vm._v("Guardar")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    return _vm.modificar()
+                  }
+                }
+              },
+              [_vm._v("Modificar")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    return _vm.eliminar()
+                  }
+                }
+              },
+              [_vm._v("Eliminar")]
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.buscar,
+            expression: "buscar"
+          }
+        ],
+        attrs: { type: "text", placeholder: "Asignacion" },
+        domProps: { value: _vm.buscar },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.buscar = $event.target.value
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          attrs: { type: "button" },
+          on: {
+            click: function($event) {
+              return _vm.listar(_vm.buscar)
+            }
+          }
+        },
+        [_vm._v("\n    Buscar\n    ")]
+      ),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("table", { attrs: { border: "1" } }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          _vm._l(_vm.arrayAsignacion, function(asignacion) {
+            return _c("tr", { key: asignacion.id }, [
+              _c("td", { domProps: { textContent: _vm._s(asignacion.id) } }),
+              _vm._v(" "),
+              _c("td", {
+                domProps: { textContent: _vm._s(asignacion.codGestion) }
+              }),
+              _vm._v(" "),
+              _c("td", {
+                domProps: { textContent: _vm._s(asignacion.codCurso) }
+              }),
+              _vm._v(" "),
+              _c("td", {
+                domProps: { textContent: _vm._s(asignacion.codParalelo) }
+              }),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "a",
+                  {
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        return _vm.llenar(asignacion)
+                      }
+                    }
+                  },
+                  [_vm._v("Seleccionar")]
+                )
+              ])
+            ])
+          }),
+          0
+        )
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("h1", [_vm._v("Asignar curso y gestion")])
+    return _c("thead", [
+      _c("th", [_vm._v("Id")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Gestion")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Curso")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Paralelo")])
     ])
   }
 ]
