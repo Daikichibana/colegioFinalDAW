@@ -2232,8 +2232,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -3729,9 +3727,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -3746,7 +3741,7 @@ __webpack_require__.r(__webpack_exports__);
       var me = this;
       var url = '/paralelo?buscar=' + buscar;
       axios.get(url).then(function (response) {
-        me.arrayEstudiante = response.data;
+        me.arrayParalelo = response.data;
       })["catch"](function (error) {
         console.log(error);
       });
@@ -3856,9 +3851,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -3873,7 +3865,7 @@ __webpack_require__.r(__webpack_exports__);
       var me = this;
       var url = '/turno?buscar=' + buscar;
       axios.get(url).then(function (response) {
-        me.arrayEstudiante = response.data;
+        me.arrayTurno = response.data;
       })["catch"](function (error) {
         console.log(error);
       });
@@ -41671,187 +41663,190 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("center", [
-    _c("div", { staticClass: "container" }, [
-      _c("br"),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("h3", [_vm._v("Gestion Bimestres")]),
-      _vm._v(" "),
-      _c("form", { attrs: { action: "", method: "$POST" } }, [
-        _c("table", [
-          _c("tr", [
-            _c("td", [_vm._v(" Bimestre ")]),
-            _vm._v(" "),
-            _c("td", [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.bimestre,
-                    expression: "bimestre"
-                  }
-                ],
-                attrs: { type: "text", placeholder: "Nombre Bimestre" },
-                domProps: { value: _vm.bimestre },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.bimestre = $event.target.value
-                  }
-                }
-              })
-            ])
-          ]),
+  return _c("div", { staticClass: "container" }, [
+    _c("br"),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("h3", [_vm._v("Gestion Bimestres")]),
+    _vm._v(" "),
+    _c("form", { attrs: { action: "", method: "$POST" } }, [
+      _c("table", [
+        _c("tr", [
+          _c("td", [_vm._v(" Bimestre ")]),
           _vm._v(" "),
-          _c("tr", [
-            _c("td", { attrs: { colspan: "3" } }, [
-              _c("br"),
-              _vm._v(" "),
-              _c("br"),
-              _vm._v(" "),
-              _c(
-                "button",
+          _c("td", [
+            _c("input", {
+              directives: [
                 {
-                  attrs: { type: "button" },
-                  on: {
-                    click: function($event) {
-                      return _vm.nuevo()
-                    }
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.bimestre,
+                  expression: "bimestre"
+                }
+              ],
+              attrs: { type: "text", placeholder: "Nombre Bimestre" },
+              domProps: { value: _vm.bimestre },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
                   }
-                },
-                [_vm._v("Nuevo")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  attrs: { type: "button" },
-                  on: {
-                    click: function($event) {
-                      return _vm.guardar()
-                    }
-                  }
-                },
-                [_vm._v("Guardar")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  attrs: { type: "button" },
-                  on: {
-                    click: function($event) {
-                      return _vm.modificar()
-                    }
-                  }
-                },
-                [_vm._v("Modificar")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  attrs: { type: "button" },
-                  on: {
-                    click: function($event) {
-                      return _vm.eliminar()
-                    }
-                  }
-                },
-                [_vm._v("Eliminar")]
-              )
-            ])
+                  _vm.bimestre = $event.target.value
+                }
+              }
+            })
           ])
         ]),
         _vm._v(" "),
-        _c("br"),
-        _vm._v(" "),
-        _c("br"),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.buscar,
-              expression: "buscar"
-            }
-          ],
-          attrs: { type: "text", placeholder: "Nombre Bimestre" },
-          domProps: { value: _vm.buscar },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.buscar = $event.target.value
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            attrs: { type: "button" },
-            on: {
-              click: function($event) {
-                return _vm.listar(_vm.buscar)
-              }
-            }
-          },
-          [_vm._v("Buscar por Nombre")]
-        )
+        _c("tr", [
+          _c("td", { attrs: { colspan: "3" } }, [
+            _c("br"),
+            _vm._v(" "),
+            _c("br"),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    return _vm.nuevo()
+                  }
+                }
+              },
+              [_vm._v("Nuevo")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    return _vm.guardar()
+                  }
+                }
+              },
+              [_vm._v("Guardar")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    return _vm.modificar()
+                  }
+                }
+              },
+              [_vm._v("Modificar")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    return _vm.eliminar()
+                  }
+                }
+              },
+              [_vm._v("Eliminar")]
+            )
+          ])
+        ])
       ]),
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
-      _c("table", { attrs: { border: "1" } }, [
-        _c("thead", [
-          _c("th", [_vm._v("id")]),
-          _vm._v(" "),
-          _c("th", [_vm._v("Bimestre")]),
-          _vm._v(" "),
-          _c("th", [_vm._v("Opcion")])
-        ]),
-        _vm._v(" "),
-        _c(
-          "tbody",
-          _vm._l(_vm.arrayBimestre, function(bimestre) {
-            return _c("tr", { key: bimestre.id }, [
-              _c("td", { domProps: { textContent: _vm._s(bimestre.id) } }),
-              _vm._v(" "),
-              _c("td", {
-                domProps: { textContent: _vm._s(bimestre.bimestre) }
-              }),
-              _vm._v(" "),
-              _c("td", [
-                _c(
-                  "a",
-                  {
-                    attrs: { href: "#" },
-                    on: {
-                      click: function($event) {
-                        return _vm.llenar(bimestre)
-                      }
+      _c("br"),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.buscar,
+            expression: "buscar"
+          }
+        ],
+        attrs: { type: "text", placeholder: "Nombre Bimestre" },
+        domProps: { value: _vm.buscar },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.buscar = $event.target.value
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          attrs: { type: "button" },
+          on: {
+            click: function($event) {
+              return _vm.listar(_vm.buscar)
+            }
+          }
+        },
+        [_vm._v("Buscar por Nombre")]
+      )
+    ]),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("table", { attrs: { border: "1" } }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "tbody",
+        _vm._l(_vm.arrayBimestre, function(bimestre) {
+          return _c("tr", { key: bimestre.id }, [
+            _c("td", { domProps: { textContent: _vm._s(bimestre.id) } }),
+            _vm._v(" "),
+            _c("td", { domProps: { textContent: _vm._s(bimestre.bimestre) } }),
+            _vm._v(" "),
+            _c("td", [
+              _c(
+                "a",
+                {
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      return _vm.llenar(bimestre)
                     }
-                  },
-                  [_vm._v("Seleccionar")]
-                )
-              ])
+                  }
+                },
+                [_vm._v("Seleccionar")]
+              )
             ])
-          }),
-          0
-        )
-      ])
+          ])
+        }),
+        0
+      )
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("th", [_vm._v("id")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Bimestre")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Opcion")])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -44229,185 +44224,190 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("center", [
-    _c("div", { staticClass: "container" }, [
-      _c("br"),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("h3", [_vm._v("Gestion Paralelos")]),
-      _vm._v(" "),
-      _c("form", { attrs: { action: "", method: "$POST" } }, [
-        _c("table", [
-          _c("tr", [
-            _c("td", [_vm._v(" Nombre ")]),
-            _vm._v(" "),
-            _c("td", [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.nombre,
-                    expression: "nombre"
-                  }
-                ],
-                attrs: { type: "text", placeholder: "Nombre Paralelo" },
-                domProps: { value: _vm.nombre },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.nombre = $event.target.value
-                  }
-                }
-              })
-            ])
-          ]),
+  return _c("div", { staticClass: "container" }, [
+    _c("br"),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("h3", [_vm._v("Gestion Paralelos")]),
+    _vm._v(" "),
+    _c("form", { attrs: { action: "", method: "$POST" } }, [
+      _c("table", [
+        _c("tr", [
+          _c("td", [_vm._v(" Nombre ")]),
           _vm._v(" "),
-          _c("tr", [
-            _c("td", { attrs: { colspan: "3" } }, [
-              _c("br"),
-              _vm._v(" "),
-              _c("br"),
-              _vm._v(" "),
-              _c(
-                "button",
+          _c("td", [
+            _c("input", {
+              directives: [
                 {
-                  attrs: { type: "button" },
-                  on: {
-                    click: function($event) {
-                      return _vm.nuevo()
-                    }
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.nombre,
+                  expression: "nombre"
+                }
+              ],
+              attrs: { type: "text", placeholder: "Nombre Paralelo" },
+              domProps: { value: _vm.nombre },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
                   }
-                },
-                [_vm._v("Nuevo")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  attrs: { type: "button" },
-                  on: {
-                    click: function($event) {
-                      return _vm.guardar()
-                    }
-                  }
-                },
-                [_vm._v("Guardar")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  attrs: { type: "button" },
-                  on: {
-                    click: function($event) {
-                      return _vm.modificar()
-                    }
-                  }
-                },
-                [_vm._v("Modificar")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  attrs: { type: "button" },
-                  on: {
-                    click: function($event) {
-                      return _vm.eliminar()
-                    }
-                  }
-                },
-                [_vm._v("Eliminar")]
-              )
-            ])
+                  _vm.nombre = $event.target.value
+                }
+              }
+            })
           ])
         ]),
         _vm._v(" "),
-        _c("br"),
-        _vm._v(" "),
-        _c("br"),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.buscar,
-              expression: "buscar"
-            }
-          ],
-          attrs: { type: "text", placeholder: "Nombre Paralelo" },
-          domProps: { value: _vm.buscar },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.buscar = $event.target.value
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            attrs: { type: "button" },
-            on: {
-              click: function($event) {
-                return _vm.listar(_vm.buscar)
-              }
-            }
-          },
-          [_vm._v("Buscar por Nombre")]
-        )
+        _c("tr", [
+          _c("td", { attrs: { colspan: "3" } }, [
+            _c("br"),
+            _vm._v(" "),
+            _c("br"),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    return _vm.nuevo()
+                  }
+                }
+              },
+              [_vm._v("Nuevo")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    return _vm.guardar()
+                  }
+                }
+              },
+              [_vm._v("Guardar")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    return _vm.modificar()
+                  }
+                }
+              },
+              [_vm._v("Modificar")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    return _vm.eliminar()
+                  }
+                }
+              },
+              [_vm._v("Eliminar")]
+            )
+          ])
+        ])
       ]),
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
-      _c("table", { attrs: { border: "1" } }, [
-        _c("thead", [
-          _c("th", [_vm._v("id")]),
-          _vm._v(" "),
-          _c("th", [_vm._v("Nombre")]),
-          _vm._v(" "),
-          _c("th", [_vm._v("Opcion")])
-        ]),
-        _vm._v(" "),
-        _c(
-          "tbody",
-          _vm._l(_vm.arrayParalelo, function(paralelo) {
-            return _c("tr", { key: paralelo.id }, [
-              _c("td", { domProps: { textContent: _vm._s(paralelo.id) } }),
-              _vm._v(" "),
-              _c("td", { domProps: { textContent: _vm._s(paralelo.nombre) } }),
-              _vm._v(" "),
-              _c("td", [
-                _c(
-                  "a",
-                  {
-                    attrs: { href: "#" },
-                    on: {
-                      click: function($event) {
-                        return _vm.llenar(paralelo)
-                      }
+      _c("br"),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.buscar,
+            expression: "buscar"
+          }
+        ],
+        attrs: { type: "text", placeholder: "Nombre Paralelo" },
+        domProps: { value: _vm.buscar },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.buscar = $event.target.value
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          attrs: { type: "button" },
+          on: {
+            click: function($event) {
+              return _vm.listar(_vm.buscar)
+            }
+          }
+        },
+        [_vm._v("Buscar por Nombre")]
+      )
+    ]),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("table", { attrs: { border: "1" } }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "tbody",
+        _vm._l(_vm.arrayParalelo, function(paralelo) {
+          return _c("tr", { key: paralelo.id }, [
+            _c("td", { domProps: { textContent: _vm._s(paralelo.id) } }),
+            _vm._v(" "),
+            _c("td", { domProps: { textContent: _vm._s(paralelo.nombre) } }),
+            _vm._v(" "),
+            _c("td", [
+              _c(
+                "a",
+                {
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      return _vm.llenar(paralelo)
                     }
-                  },
-                  [_vm._v("Seleccionar")]
-                )
-              ])
+                  }
+                },
+                [_vm._v("Seleccionar")]
+              )
             ])
-          }),
-          0
-        )
-      ])
+          ])
+        }),
+        0
+      )
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("th", [_vm._v("id")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Nombre")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Opcion")])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -44430,185 +44430,190 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("center", [
-    _c("div", { staticClass: "container" }, [
-      _c("br"),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("h3", [_vm._v("Gestion Turnos")]),
-      _vm._v(" "),
-      _c("form", { attrs: { action: "", method: "$POST" } }, [
-        _c("table", [
-          _c("tr", [
-            _c("td", [_vm._v(" Nombre ")]),
-            _vm._v(" "),
-            _c("td", [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.nombre,
-                    expression: "nombre"
-                  }
-                ],
-                attrs: { type: "text", placeholder: "Nombre Turno" },
-                domProps: { value: _vm.nombre },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.nombre = $event.target.value
-                  }
-                }
-              })
-            ])
-          ]),
+  return _c("div", { staticClass: "container" }, [
+    _c("br"),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("h3", [_vm._v("Gestion Turnos")]),
+    _vm._v(" "),
+    _c("form", { attrs: { action: "", method: "$POST" } }, [
+      _c("table", [
+        _c("tr", [
+          _c("td", [_vm._v(" Nombre ")]),
           _vm._v(" "),
-          _c("tr", [
-            _c("td", { attrs: { colspan: "3" } }, [
-              _c("br"),
-              _vm._v(" "),
-              _c("br"),
-              _vm._v(" "),
-              _c(
-                "button",
+          _c("td", [
+            _c("input", {
+              directives: [
                 {
-                  attrs: { type: "button" },
-                  on: {
-                    click: function($event) {
-                      return _vm.nuevo()
-                    }
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.nombre,
+                  expression: "nombre"
+                }
+              ],
+              attrs: { type: "text", placeholder: "Nombre Turno" },
+              domProps: { value: _vm.nombre },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
                   }
-                },
-                [_vm._v("Nuevo")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  attrs: { type: "button" },
-                  on: {
-                    click: function($event) {
-                      return _vm.guardar()
-                    }
-                  }
-                },
-                [_vm._v("Guardar")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  attrs: { type: "button" },
-                  on: {
-                    click: function($event) {
-                      return _vm.modificar()
-                    }
-                  }
-                },
-                [_vm._v("Modificar")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  attrs: { type: "button" },
-                  on: {
-                    click: function($event) {
-                      return _vm.eliminar()
-                    }
-                  }
-                },
-                [_vm._v("Eliminar")]
-              )
-            ])
+                  _vm.nombre = $event.target.value
+                }
+              }
+            })
           ])
         ]),
         _vm._v(" "),
-        _c("br"),
-        _vm._v(" "),
-        _c("br"),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.buscar,
-              expression: "buscar"
-            }
-          ],
-          attrs: { type: "text", placeholder: "Nombre Turno" },
-          domProps: { value: _vm.buscar },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.buscar = $event.target.value
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            attrs: { type: "button" },
-            on: {
-              click: function($event) {
-                return _vm.listar(_vm.buscar)
-              }
-            }
-          },
-          [_vm._v("Buscar por Nombre")]
-        )
+        _c("tr", [
+          _c("td", { attrs: { colspan: "3" } }, [
+            _c("br"),
+            _vm._v(" "),
+            _c("br"),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    return _vm.nuevo()
+                  }
+                }
+              },
+              [_vm._v("Nuevo")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    return _vm.guardar()
+                  }
+                }
+              },
+              [_vm._v("Guardar")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    return _vm.modificar()
+                  }
+                }
+              },
+              [_vm._v("Modificar")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    return _vm.eliminar()
+                  }
+                }
+              },
+              [_vm._v("Eliminar")]
+            )
+          ])
+        ])
       ]),
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
-      _c("table", { attrs: { border: "1" } }, [
-        _c("thead", [
-          _c("th", [_vm._v("id")]),
-          _vm._v(" "),
-          _c("th", [_vm._v("Nombre")]),
-          _vm._v(" "),
-          _c("th", [_vm._v("Opcion")])
-        ]),
-        _vm._v(" "),
-        _c(
-          "tbody",
-          _vm._l(_vm.arrayTurno, function(turno) {
-            return _c("tr", { key: turno.id }, [
-              _c("td", { domProps: { textContent: _vm._s(turno.id) } }),
-              _vm._v(" "),
-              _c("td", { domProps: { textContent: _vm._s(turno.nombre) } }),
-              _vm._v(" "),
-              _c("td", [
-                _c(
-                  "a",
-                  {
-                    attrs: { href: "#" },
-                    on: {
-                      click: function($event) {
-                        return _vm.llenar(turno)
-                      }
+      _c("br"),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.buscar,
+            expression: "buscar"
+          }
+        ],
+        attrs: { type: "text", placeholder: "Nombre Turno" },
+        domProps: { value: _vm.buscar },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.buscar = $event.target.value
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          attrs: { type: "button" },
+          on: {
+            click: function($event) {
+              return _vm.listar(_vm.buscar)
+            }
+          }
+        },
+        [_vm._v("Buscar por Nombre")]
+      )
+    ]),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("table", { attrs: { border: "1" } }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "tbody",
+        _vm._l(_vm.arrayTurno, function(turno) {
+          return _c("tr", { key: turno.id }, [
+            _c("td", { domProps: { textContent: _vm._s(turno.id) } }),
+            _vm._v(" "),
+            _c("td", { domProps: { textContent: _vm._s(turno.nombre) } }),
+            _vm._v(" "),
+            _c("td", [
+              _c(
+                "a",
+                {
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      return _vm.llenar(turno)
                     }
-                  },
-                  [_vm._v("Seleccionar")]
-                )
-              ])
+                  }
+                },
+                [_vm._v("Seleccionar")]
+              )
             ])
-          }),
-          0
-        )
-      ])
+          ])
+        }),
+        0
+      )
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("th", [_vm._v("id")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Nombre")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Opcion")])
+    ])
+  }
+]
 render._withStripped = true
 
 

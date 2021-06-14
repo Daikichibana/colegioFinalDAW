@@ -1,5 +1,4 @@
 <template>
-<center>
     <div class="container">
     <br>
     <br>
@@ -42,7 +41,6 @@
         </tbody>
     </table>
     </div>
-</center>
 
 
 </template>

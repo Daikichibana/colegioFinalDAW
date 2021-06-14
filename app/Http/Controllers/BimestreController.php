@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Bimestre;
+use DB;
 
-class Bimestre extends Controller
+class BimestreController extends Controller
 {
     public function index(Request $request){
         $buscar= $request->buscar;

@@ -1,5 +1,4 @@
 <template>
-<center>
     <div class="container">
     <br>
     <br>
@@ -42,8 +41,6 @@
         </tbody>
     </table>
     </div>
-</center>
-
 
 </template>
 
@@ -62,7 +59,7 @@
                 let me = this;
                 var url='/paralelo?buscar='+buscar;
                 axios.get(url).then(function(response){
-                    me.arrayEstudiante= response.data;
+                    me.arrayParalelo= response.data;
                 })
                 .catch(function(error){
                     console.log(error);
@@ -84,6 +81,7 @@
                 axios.put('paralelo/modificar',{
                     'nombre': this.nombre,
                     'id': this.id,
+
                 }).then(function(error){
                     me.listar('');
                 }).catch(function(error){

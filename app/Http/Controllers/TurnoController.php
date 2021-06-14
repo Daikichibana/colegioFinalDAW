@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Turno;
+use DB;
 
-class Turno extends Controller
+class TurnoController extends Controller
 {
     public function index(Request $request){
         $buscar= $request->buscar;

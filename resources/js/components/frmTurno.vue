@@ -1,5 +1,4 @@
 <template>
-<center>
     <div class="container">
     <br>
     <br>
@@ -42,8 +41,6 @@
         </tbody>
     </table>
     </div>
-</center>
-
 
 </template>
 
@@ -62,7 +59,7 @@
                 let me = this;
                 var url='/turno?buscar='+buscar;
                 axios.get(url).then(function(response){
-                    me.arrayEstudiante= response.data;
+                    me.arrayTurno= response.data;
                 })
                 .catch(function(error){
                     console.log(error);
