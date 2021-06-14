@@ -3868,6 +3868,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -44691,24 +44693,6 @@ var render = function() {
                         }
                       },
                       [_vm._v("Buscar Curso")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticStyle: { "margin-left": "15px" },
-                        attrs: {
-                          href: "#",
-                          "data-toggle": "modal",
-                          "data-target": "#modalNotas"
-                        },
-                        on: {
-                          click: function($event) {
-                            return _vm.frmVerificarNotas()
-                          }
-                        }
-                      },
-                      [_vm._v("Verificar Notas")]
                     )
                   ]),
                   _vm._v(" "),
