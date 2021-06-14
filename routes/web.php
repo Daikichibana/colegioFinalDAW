@@ -115,3 +115,10 @@ Route::get('/asignacioncursogestion',[App\Http\Controllers\AsignacionGestionCurs
 Route::post('/asignacioncursogestion/registrar',[App\Http\Controllers\AsignacionGestionCursoController::class, 'store']);
 Route::put('/asignacioncursogestion/modificar',[App\Http\Controllers\AsignacionGestionCursoController::class, 'update']);
 Route::put('/asignacioncursogestion/eliminar',[App\Http\Controllers\AsignacionGestionCursoController::class, 'delete']);
+
+//Asignacion Curso Estudiante
+
+Route::get('/asignacioncursoestudiante',[App\Http\Controllers\AsignacionEstudianteCursoController::class, 'index']);
+Route::post('/asignacioncursoestudiante/registrar',[App\Http\Controllers\AsignacionEstudianteCursoController::class, 'store']);
+Route::put('/asignacioncursoestudiante/modificar',[App\Http\Controllers\AsignacionEstudianteCursoController::class, 'update']);
+Route::put('/asignacioncursoestudiante/eliminar',[App\Http\Controllers\AsignacionEstudianteCursoController::class, 'delete']);
