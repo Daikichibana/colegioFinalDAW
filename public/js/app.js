@@ -2284,8 +2284,190 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  mounted: function mounted() {}
+  data: function data() {
+    return {
+      hola: {},
+      id: 0,
+      materia: '',
+      idmateria: 0,
+      curso: '',
+      idCurso: 0,
+      docente: '',
+      iddocente: 0,
+      buscar: '',
+      buscarmateria: '',
+      buscarCurso: '',
+      buscardocente: '',
+      arrayAsignacion: [],
+      arrayCurso: [],
+      arraymateria: [],
+      arraydocente: []
+    };
+  },
+  methods: {
+    listar: function listar(buscar) {
+      var me = this;
+      var url = '/asignacioncursomateria?buscar=' + buscar;
+      axios.get(url).then(function (response) {
+        me.arrayAsignacion = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    listarCurso: function listarCurso(buscarCursoGestion) {
+      var me = this;
+      var url = '/asignacioncursomateria/buscarcursogestion?buscar=' + buscarCursoGestion;
+      axios.get(url).then(function (response) {
+        me.arrayCurso = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    listarmateria: function listarmateria(buscarmateria) {
+      var me = this;
+      var url = '/asignacioncursomateria/buscarmateria?buscar=' + buscarmateria;
+      axios.get(url).then(function (response) {
+        me.arraymateria = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    listardocente: function listardocente(buscardocente) {
+      var me = this;
+      var url = '/asignacioncursomateria/buscardocente?buscar=' + buscardocente;
+      axios.get(url).then(function (response) {
+        me.arraydocente = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    guardar: function guardar() {
+      var me = this;
+      axios.post('/asignacioncursomateria/registrar', {
+        'codCursoGestion': this.curso,
+        'codMateria': this.materia,
+        'codDocente': this.docente
+      }).then(function (error) {
+        me.listar('');
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    modificar: function modificar() {
+      var me = this;
+      axios.put('/asignacioncursomateria/modificar', {
+        'codCursoGestion': this.curso,
+        'codMateria': this.materia,
+        'codDocente': this.docente,
+        'id': this.id
+      }).then(function (error) {
+        me.listar('');
+      })["catch"](function (error) {
+        console.log(error);
+      });
+      this.nuevo();
+    },
+    eliminar: function eliminar() {
+      var me = this;
+      axios.put('/asignacioncursomateria/eliminar', {
+        'id': this.id
+      }).then(function (error) {
+        me.listar('');
+      })["catch"](function (error) {
+        console.log(error);
+      });
+      this.nuevo();
+    },
+    nuevo: function nuevo() {
+      this.curso = '';
+      this.materia = '';
+      this.docente = '';
+    },
+    llenar: function llenar() {
+      var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+      this.id = data['id'];
+      this.materia = data['codMateria'];
+      this.curso = data['codCursoGestion'];
+      this.docente = data['codDocente'];
+    }
+  },
+  mounted: function mounted() {
+    this.listar('');
+    this.listarCurso('');
+    this.listarmateria('');
+    this.listardocente('');
+  }
 });
 
 /***/ }),
@@ -42551,15 +42733,349 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container" }, [
+    _c("br"),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("h3", [_vm._v("Asignar curso, Materia y Docente")]),
+    _vm._v(" "),
+    _c("form", { attrs: { action: "", method: "$POST" } }, [
+      _c("table", [
+        _c("tr", [
+          _c("td", [_vm._v(" Materia ")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.materia,
+                  expression: "materia"
+                }
+              ],
+              attrs: { placeholder: "materia" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.materia = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
+              }
+            },
+            _vm._l(_vm.arraymateria, function(materias) {
+              return _c(
+                "option",
+                { key: materias.id, domProps: { value: materias.id } },
+                [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(materias.nombre) +
+                      " \n            "
+                  )
+                ]
+              )
+            }),
+            0
+          )
+        ]),
+        _vm._v(" "),
+        _c("tr", [
+          _c("td", [_vm._v(" Curso ")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.curso,
+                  expression: "curso"
+                }
+              ],
+              attrs: { placeholder: "Curso" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.curso = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
+              }
+            },
+            _vm._l(_vm.arrayCurso, function(cursos) {
+              return _c("option", {
+                key: cursos.id,
+                domProps: {
+                  value: cursos.id,
+                  textContent: _vm._s(
+                    cursos.curso_nombre +
+                      " " +
+                      cursos.paralelo_nombre +
+                      " " +
+                      cursos.gestion_nombre
+                  )
+                }
+              })
+            }),
+            0
+          )
+        ]),
+        _vm._v(" "),
+        _c("tr", [
+          _c("td", [_vm._v(" Docente ")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.docente,
+                  expression: "docente"
+                }
+              ],
+              attrs: { placeholder: "docente" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.docente = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
+              }
+            },
+            _vm._l(_vm.arraydocente, function(docentes) {
+              return _c("option", {
+                key: docentes.id,
+                domProps: {
+                  value: docentes.id,
+                  textContent: _vm._s(docentes.nombre + " " + docentes.apellido)
+                }
+              })
+            }),
+            0
+          )
+        ]),
+        _vm._v(" "),
+        _c("tr", [
+          _c("td", { attrs: { colspan: "3" } }, [
+            _c("br"),
+            _vm._v(" "),
+            _c("br"),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    return _vm.nuevo()
+                  }
+                }
+              },
+              [_vm._v("Nuevo")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    return _vm.guardar()
+                  }
+                }
+              },
+              [_vm._v("Guardar")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    return _vm.modificar()
+                  }
+                }
+              },
+              [_vm._v("Modificar")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    return _vm.eliminar()
+                  }
+                }
+              },
+              [_vm._v("Eliminar")]
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.buscar,
+            expression: "buscar"
+          }
+        ],
+        attrs: { type: "text", placeholder: "Asignacion" },
+        domProps: { value: _vm.buscar },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.buscar = $event.target.value
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          attrs: { type: "button" },
+          on: {
+            click: function($event) {
+              return _vm.listar(_vm.buscar)
+            }
+          }
+        },
+        [_vm._v("\n    Buscar\n    ")]
+      ),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("table", { attrs: { border: "1" } }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          _vm._l(_vm.arrayAsignacion, function(asignacion) {
+            return _c("tr", { key: asignacion.id }, [
+              _c("td", { domProps: { textContent: _vm._s(asignacion.id) } }),
+              _vm._v(" "),
+              _c("td", {
+                staticStyle: { display: "none" },
+                domProps: { textContent: _vm._s(asignacion.codMateria) }
+              }),
+              _vm._v(" "),
+              _c("td", {
+                domProps: { textContent: _vm._s(asignacion.nombreMateria) }
+              }),
+              _vm._v(" "),
+              _c("td", {
+                staticStyle: { display: "none" },
+                domProps: { textContent: _vm._s(asignacion.codCursoGestion) }
+              }),
+              _vm._v(" "),
+              _c("td", {
+                domProps: {
+                  textContent: _vm._s(
+                    asignacion.nombreCurso + asignacion.nombreParalelo
+                  )
+                }
+              }),
+              _vm._v(" "),
+              _c("td", {
+                domProps: { textContent: _vm._s(asignacion.gestionCurso) }
+              }),
+              _vm._v(" "),
+              _c("td", {
+                staticStyle: { display: "none" },
+                domProps: { textContent: _vm._s(asignacion.codDocente) }
+              }),
+              _vm._v(" "),
+              _c("td", {
+                domProps: {
+                  textContent: _vm._s(
+                    asignacion.nombreDocente + " " + asignacion.apellidoDocente
+                  )
+                }
+              }),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "a",
+                  {
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        return _vm.llenar(asignacion)
+                      }
+                    }
+                  },
+                  [_vm._v("Seleccionar")]
+                )
+              ])
+            ])
+          }),
+          0
+        )
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("h1", [_vm._v("Asignar Curso, Materia y docentes")])
+    return _c("thead", [
+      _c("th", [_vm._v("Id")]),
+      _vm._v(" "),
+      _c("th", { staticStyle: { display: "none" } }, [_vm._v("materia")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Nombre materia")]),
+      _vm._v(" "),
+      _c("th", { staticStyle: { display: "none" } }, [_vm._v("curso")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Nombre Curso")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Gestion")]),
+      _vm._v(" "),
+      _c("th", { staticStyle: { display: "none" } }, [_vm._v("docente")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Nombre docente")])
     ])
   }
 ]
