@@ -47,11 +47,12 @@ Route::put('/users/eliminar',[App\Http\Controllers\UserController::class, 'delet
 //Inscripcion
 Route::get('/inscripcion',[App\Http\Controllers\InscripcionController::class, 'index']);
 Route::post('/inscripcion/registrar',[App\Http\Controllers\InscripcionController::class, 'store']);
-Route::put('/inscripicion/modificar',[App\Http\Controllers\InscripcionController::class, 'update']);
+Route::put('/inscripcion/modificar',[App\Http\Controllers\InscripcionController::class, 'update']);
 Route::put('/inscripcion/eliminar',[App\Http\Controllers\InscripcionController::class, 'delete']);
+Route::put('/inscripcion/eliminarDetalles',[App\Http\Controllers\InscripcionController::class, 'deleteDetalle']);
 Route::get('/inscripcion/obtenerDetalles',[App\Http\Controllers\InscripcionController::class, 'obtenerDetalles']);
 Route::get('/inscripcion/obtenerCabecera',[App\Http\Controllers\InscripcionController::class, 'obtenerCabecera']);
-Route::get('/frmbuscarcurso', [App\Http\Controllers\AsignacionCursoGestionController::class, 'index']);
+Route::get('/frmbuscarcurso', [App\Http\Controllers\AsignacionGestionCursoController::class, 'buscarCurso']);
 //Route::get('/frmbuscarnotas', [App\Http\Controllers\NotaController::class, 'index']);
 
 //Gestion

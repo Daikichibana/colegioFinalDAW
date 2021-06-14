@@ -3866,9 +3866,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
+      id: 0,
       listado: 0,
       buscarCurso: "",
       fecha: "",
@@ -3967,6 +3970,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       return sw;
     },
     nuevo: function nuevo() {
+      this.id = 0;
       this.listado = 0;
       this.estudiante = "";
       this.curso = "";
@@ -4007,6 +4011,43 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       }
 
       this.nuevo();
+    },
+    modificar: function modificar() {
+      var me = this;
+      axios.put('inscripcion/eliminarDetalles', {
+        id: this.id
+      }).then(function (error) {//
+      })["catch"](function (error) {
+        console.log(error);
+      });
+      axios.put('/inscripcion/modificar', {
+        fecha: this.fecha,
+        idCurso: this.idCurso,
+        //Asignacion curso Gestion
+        idEstudiante: this.idEstudiante,
+        data: this.arrayDetalle,
+        id: this.id
+      }).then(function (response) {
+        me.respt = 'inscripcion Modificada...!';
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    eliminar: function eliminar() {
+      var me = this;
+      axios.put('inscripcion/eliminarDetalles', {
+        id: this.id
+      }).then(function (error) {//
+      })["catch"](function (error) {
+        console.log(error);
+      });
+      axios.put('inscripcion/eliminar', {
+        'id': this.id
+      }).then(function (error) {
+        me.listar('');
+      })["catch"](function (error) {
+        console.log(error);
+      });
     },
     buscarInscripcion: function buscarInscripcion() {
       this.listado = 1;
@@ -4075,6 +4116,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       var url = "/inscripcion/obtenerCabecera?id=" + id;
       axios.get(url).then(function (response) {
         arrayInscripcionT = response.data.inscripcion;
+        me.id = arrayInscripcionT[0].id;
         console.log(arrayInscripcionT);
         me.idEstudiante = arrayInscripcionT[0].idEstudiante;
         me.estudianteNombre = arrayInscripcionT[0].estudianteNombre;
@@ -4082,7 +4124,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         me.idCurso = arrayInscripcionT[0].idCurso;
         me.cursoCurso = arrayInscripcionT[0].cursoNombre + arrayInscripcionT[0].cursoParalelo;
         me.cursoGestion = arrayInscripcionT[0].cursoGestion;
-        me.fecha = arrayInscripcionT[0].fechaInscripcion;
+        me.fecha = arrayInscripcionT[0].fecha;
         console.log(me);
         console.log(arrayInscripcionT.idEstudiantes);
         console.log(_typeof(arrayInscripcionT));
@@ -44833,6 +44875,32 @@ var render = function() {
                           }
                         },
                         [_vm._v("\n              Guardar\n            ")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.modificar()
+                            }
+                          }
+                        },
+                        [_vm._v("Modificar")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.eliminar()
+                            }
+                          }
+                        },
+                        [_vm._v("Eliminar")]
                       ),
                       _vm._v(" "),
                       _c(

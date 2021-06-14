@@ -109,6 +109,8 @@
               <button type="button" @click="guardarInscripcion()">
                 Guardar
               </button>
+              <button type="button" @click="modificar()">Modificar</button>
+              <button type="button" @click="eliminar()">Eliminar</button>
               <button type="button" @click="buscarInscripcion()">Buscar</button>
             </td>
           </tr>
@@ -438,6 +440,7 @@
 export default {
   data() {
     return {
+      id: 0,
       listado: 0,
       buscarCurso: "",
       fecha: "",
@@ -530,6 +533,7 @@ export default {
       return sw;
     },
     nuevo() {
+      this.id = 0;
       this.listado = 0;
       this.estudiante = "";
       this.curso = "";
@@ -577,6 +581,54 @@ export default {
 
         this.nuevo();
     },
+
+      modificar(){
+            let me = this;
+            axios.put('inscripcion/eliminarDetalles',{
+                id: this.id
+            }).then(function(error){
+                //
+            }).catch(function(error){
+                console.log(error);
+            }); 
+
+            axios.put('/inscripcion/modificar',{
+                fecha: this.fecha,
+                idCurso: this.idCurso, //Asignacion curso Gestion
+                idEstudiante: this.idEstudiante,
+                data: this.arrayDetalle,
+                id : this.id,
+
+            }).then(function (response) {
+                me.respt = 'inscripcion Modificada...!';
+            }).catch(function (error) {
+                console.log(error);
+            });        
+        },
+
+
+        eliminar(){
+            let me = this;
+
+            axios.put('inscripcion/eliminarDetalles',{
+                id: this.id
+            }).then(function(error){
+                //
+            }).catch(function(error){
+                console.log(error);
+            }); 
+
+
+            axios.put('inscripcion/eliminar',{
+              'id': this.id,
+            }).then(function(error){
+                me.listar('');
+            }).catch(function(error){
+                console.log(error);
+            });               
+        },
+
+
     buscarInscripcion() {
       this.listado = 1;
       this.listar("");
@@ -667,7 +719,7 @@ export default {
         .get(url)
         .then(function (response) {
           arrayInscripcionT = response.data.inscripcion;
-
+          me.id = arrayInscripcionT[0].id;
           console.log(arrayInscripcionT);
           me.idEstudiante = arrayInscripcionT[0].idEstudiante;
           me.estudianteNombre = arrayInscripcionT[0].estudianteNombre;
@@ -675,7 +727,7 @@ export default {
           me.idCurso = arrayInscripcionT[0].idCurso;
           me.cursoCurso = arrayInscripcionT[0].cursoNombre + arrayInscripcionT[0].cursoParalelo;
           me.cursoGestion = arrayInscripcionT[0].cursoGestion;
-          me.fecha = arrayInscripcionT[0].fechaInscripcion;
+          me.fecha = arrayInscripcionT[0].fecha;
           console.log(me);
           console.log(arrayInscripcionT.idEstudiantes);
           console.log(typeof arrayInscripcionT);

@@ -95,6 +95,12 @@ class InscripcionController extends Controller
         $inscripcion->delete();
     }    
 
+    public function deleteDetalle(Request $request){
+        $id=$request->id;
+        $detalle = DetalleInscripcion::where('detalleinscripcion.codInscripcion','=',$id);
+        $detalle->delete();
+    }    
+
     public function obtenerCabecera(Request $request){  
         $id=$request->id;
 
@@ -116,7 +122,7 @@ class InscripcionController extends Controller
         $id=$request->id;
         $detalle = DetalleInscripcion::join('apoderado','detalleinscripcion.codApoderado','=','apoderado.id')
         ->select('detalleinscripcion.codApoderado', 'detalleinscripcion.relacion', 'apoderado.id as idApoderado', 
-        'apoderado.nombre as apoderadoNombre', 'apoderado.apellido as apoderadoapellido', 'apoderado.telefono as apoderadoTelefono')
+        'apoderado.nombre as apoderadoNombre', 'apoderado.apellido as apoderadoApellido', 'apoderado.telefono as apoderadoTelefono')
         ->where('detalleinscripcion.codInscripcion','=',$id)
         ->get();
         return['detalle' => $detalle];
