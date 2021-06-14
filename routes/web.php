@@ -71,3 +71,21 @@ Route::get('/aula',[App\Http\Controllers\AulaController::class, 'index']);
 Route::post('/aula/registrar',[App\Http\Controllers\AulaController::class, 'store']);
 Route::put('/aula/modificar',[App\Http\Controllers\AulaController::class, 'update']);
 Route::put('/aula/eliminar',[App\Http\Controllers\AulaController::class, 'delete']);
+
+//Apoderado
+Route::get('/apoderado',[App\Http\Controllers\ApoderadoController::class, 'index']);
+Route::post('/apoderado/registrar',[App\Http\Controllers\ApoderadoController::class, 'store']);
+Route::put('/apoderado/modificar',[App\Http\Controllers\ApoderadoController::class, 'update']);
+Route::put('/apoderado/eliminar',[App\Http\Controllers\ApoderadoController::class, 'delete']);
+
+//Docente
+Route::get('/docente',[App\Http\Controllers\DocenteController::class, 'index']);
+Route::post('/docente/registrar',[App\Http\Controllers\DocenteController::class, 'store']); 
+Route::put('/docente/modificar',[App\Http\Controllers\DocenteController::class, 'update']);
+Route::put('/docente/eliminar',[App\Http\Controllers\DocenteController::class, 'delete']);
+
+//Horario
+Route::get('/horario',[App\Http\Controllers\HorarioController::class, 'index']);
+Route::post('/horario/registrar',[App\Http\Controllers\HorarioController::class, 'store']);
+Route::put('/horario/modificar',[App\Http\Controllers\HorarioController::class, 'update']);
+Route::put('/horario/eliminar',[App\Http\Controllers\HorarioController::class, 'delete']);
