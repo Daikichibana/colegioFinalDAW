@@ -89,3 +89,20 @@ Route::get('/horario',[App\Http\Controllers\HorarioController::class, 'index']);
 Route::post('/horario/registrar',[App\Http\Controllers\HorarioController::class, 'store']);
 Route::put('/horario/modificar',[App\Http\Controllers\HorarioController::class, 'update']);
 Route::put('/horario/eliminar',[App\Http\Controllers\HorarioController::class, 'delete']);
+//Paralelo
+Route::get('/paralelo',[App\Http\Controllers\ParaleloController::class, 'index']);
+Route::post('/paralelo/registrar',[App\Http\Controllers\ParaleloController::class, 'store']);
+Route::put('/paralelo/modificar',[App\Http\Controllers\ParaleloController::class, 'update']);
+Route::put('/paralelo/eliminar',[App\Http\Controllers\ParaleloController::class, 'delete']);
+
+//Bimestre
+Route::get('/bimestre',[App\Http\Controllers\BimestreController::class, 'index']);
+Route::post('/bimestre/registrar',[App\Http\Controllers\BimestreController::class, 'store']);
+Route::put('/bimestre/modificar',[App\Http\Controllers\BimestreController::class, 'update']);
+Route::put('/bimestre/eliminar',[App\Http\Controllers\BimestreController::class, 'delete']);
+
+//Turno
+Route::get('/turno',[App\Http\Controllers\TurnoController::class, 'index']);
+Route::post('/turno/registrar',[App\Http\Controllers\TurnoController::class, 'store']);
+Route::put('/turno/modificar',[App\Http\Controllers\TurnoController::class, 'update']);
+Route::put('/turno/eliminar',[App\Http\Controllers\TurnoController::class, 'delete']);
