@@ -2816,8 +2816,119 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  mounted: function mounted() {}
+  data: function data() {
+    return {
+      id: 0,
+      observacion: '',
+      estudiante: '',
+      idEstudiante: 0,
+      curso: '',
+      idCurso: 0,
+      materia: '',
+      idMateria: 0,
+      buscar: '',
+      buscarEstudiante: '',
+      buscarMateria: '',
+      buscarCurso: '',
+      arrayCalificacion: [],
+      arrayEstudiante: [],
+      arrayMateria: [],
+      arrayCurso: []
+    };
+  },
+  methods: {
+    listarCurso: function listarCurso(buscarCurso) {
+      var me = this;
+      var url = '/curso?buscar=' + buscarCurso;
+      axios.get(url).then(function (response) {
+        me.arrayCurso = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    mounted: function mounted() {
+      this.listarCurso('');
+    }
+  }
 });
 
 /***/ }),
@@ -43594,15 +43705,388 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container" }, [
+    _c("br"),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("h3", [_vm._v("Calificaciones")]),
+    _vm._v(" "),
+    _c("form", [
+      _c("table", [
+        _c("tr", [
+          _c("td", [_vm._v("Observacion")]),
+          _vm._v(" "),
+          _c("td", [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.observacion,
+                  expression: "observacion"
+                }
+              ],
+              attrs: { type: "text", placeholder: "Observacion" },
+              domProps: { value: _vm.observacion },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.observacion = $event.target.value
+                }
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("tr", [
+          _c("td", [_vm._v(" Estudiante ")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.estudiante,
+                  expression: "estudiante"
+                }
+              ],
+              attrs: { placeholder: "estudiante" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.estudiante = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
+              }
+            },
+            _vm._l(_vm.arrayEstudiante, function(estudiantes) {
+              return _c(
+                "option",
+                { key: estudiantes.id, domProps: { value: estudiantes.id } },
+                [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(estudiantes.nombre) +
+                      " " +
+                      _vm._s(estudiantes.apellido) +
+                      " \n            "
+                  )
+                ]
+              )
+            }),
+            0
+          )
+        ]),
+        _vm._v(" "),
+        _c("tr", [
+          _c("td", [_vm._v(" Curso ")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.curso,
+                  expression: "curso"
+                }
+              ],
+              attrs: { placeholder: "Curso" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.curso = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
+              }
+            },
+            _vm._l(_vm.arrayCurso, function(cursos) {
+              return _c("option", {
+                key: cursos.id,
+                domProps: {
+                  value: cursos.id,
+                  textContent: _vm._s(cursos.nombre)
+                }
+              })
+            }),
+            0
+          )
+        ]),
+        _vm._v(" "),
+        _c("tr", [
+          _c("td", [_vm._v(" Materia ")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.materia,
+                  expression: "materia"
+                }
+              ],
+              attrs: { placeholder: "materia" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.materia = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
+              }
+            },
+            _vm._l(_vm.arrayMateria, function(materias) {
+              return _c(
+                "option",
+                { key: materias.id, domProps: { value: materias.id } },
+                [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(materias.nombre) +
+                      " \n            "
+                  )
+                ]
+              )
+            }),
+            0
+          )
+        ]),
+        _vm._v(" "),
+        _c("tr", [
+          _c("td", { attrs: { colspan: "3" } }, [
+            _c("br"),
+            _vm._v(" "),
+            _c("br"),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    return _vm.nuevo()
+                  }
+                }
+              },
+              [_vm._v("Nuevo")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    return _vm.guardar()
+                  }
+                }
+              },
+              [_vm._v("Guardar")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    return _vm.modificar()
+                  }
+                }
+              },
+              [_vm._v("Modificar")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    return _vm.eliminar()
+                  }
+                }
+              },
+              [_vm._v("Eliminar")]
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.buscar,
+            expression: "buscar"
+          }
+        ],
+        attrs: { type: "text", placeholder: "Calificaciones" },
+        domProps: { value: _vm.buscar },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.buscar = $event.target.value
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          attrs: { type: "button" },
+          on: {
+            click: function($event) {
+              return _vm.listar(_vm.buscar)
+            }
+          }
+        },
+        [_vm._v("Buscar")]
+      ),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("table", { attrs: { border: "1" } }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          _vm._l(_vm.arrayCalificacion, function(calificacion) {
+            return _c("tr", { key: calificacion.id }, [
+              _c("td", { domProps: { textContent: _vm._s(calificacion.id) } }),
+              _vm._v(" "),
+              _c("td", {
+                staticStyle: { display: "none" },
+                domProps: { textContent: _vm._s(calificacion.notaSer) }
+              }),
+              _vm._v(" "),
+              _c("td", {
+                domProps: { textContent: _vm._s(_vm.asignacion.notaSer) }
+              }),
+              _vm._v(" "),
+              _c("td", {
+                staticStyle: { display: "none" },
+                domProps: { textContent: _vm._s(calificacion.notaSaber) }
+              }),
+              _vm._v(" "),
+              _c("td", {
+                domProps: { textContent: _vm._s(_vm.asignacion.notaSaber) }
+              }),
+              _vm._v(" "),
+              _c("td", {
+                staticStyle: { display: "none" },
+                domProps: { textContent: _vm._s(calificacion.notaHacer) }
+              }),
+              _vm._v(" "),
+              _c("td", {
+                domProps: { textContent: _vm._s(_vm.asignacion.notaHacer) }
+              }),
+              _vm._v(" "),
+              _c("td", {
+                staticStyle: { display: "none" },
+                domProps: { textContent: _vm._s(calificacion.notaDecidir) }
+              }),
+              _vm._v(" "),
+              _c("td", {
+                domProps: { textContent: _vm._s(_vm.asignacion.notaDecidir) }
+              }),
+              _vm._v(" "),
+              _c("td", {
+                staticStyle: { display: "none" },
+                domProps: { textContent: _vm._s(calificacion.codBimestre) }
+              }),
+              _vm._v(" "),
+              _c("td", {
+                domProps: { textContent: _vm._s(_vm.asignacion.bimestre) }
+              }),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "a",
+                  {
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        return _vm.llenar(_vm.asignacion)
+                      }
+                    }
+                  },
+                  [_vm._v("Seleccionar")]
+                )
+              ])
+            ])
+          }),
+          0
+        )
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("h1", [_vm._v("Calificaciones")])
+    return _c("thead", [
+      _c("th", [_vm._v("id")]),
+      _vm._v(" "),
+      _c("th", { staticStyle: { display: "none" } }, [_vm._v("notaSer")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Ser")]),
+      _vm._v(" "),
+      _c("th", { staticStyle: { display: "none" } }, [_vm._v("notaSaber")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Saber")]),
+      _vm._v(" "),
+      _c("th", { staticStyle: { display: "none" } }, [_vm._v("notaHacer")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Hacer")]),
+      _vm._v(" "),
+      _c("th", { staticStyle: { display: "none" } }, [_vm._v("notaDecidir")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Decidir")]),
+      _vm._v(" "),
+      _c("th", { staticStyle: { display: "none" } }, [_vm._v("bimestre")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Bimestre")])
     ])
   }
 ]
