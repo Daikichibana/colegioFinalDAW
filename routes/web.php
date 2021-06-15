@@ -78,6 +78,14 @@ Route::put('/aula/eliminar',[App\Http\Controllers\AulaController::class, 'delete
 Route::get('/consultarCali',[App\Http\Controllers\ConsultarCalificacion::class, 'consultarCalificacion']);
 Route::get('/buscarIdEstudiante',[App\Http\Controllers\ConsultarCalificacion::class, 'buscarEstudiante']);
 
+//Calificacion
+Route::get('/consultarNotas',[App\Http\Controllers\CalificacionController::class, 'index']);
+Route::get('/listarNotas',[App\Http\Controllers\CalificacionController::class, 'listar']);
+
+Route::put('/calificacion/modificar',[App\Http\Controllers\CalificacionController::class, 'update']);
+Route::get('/calificacion/buscarDet',[App\Http\Controllers\CalificacionController::class, 'indexDetalle']);
+
+
 //Apoderado
 Route::get('/apoderado',[App\Http\Controllers\ApoderadoController::class, 'index']);
 Route::post('/apoderado/registrar',[App\Http\Controllers\ApoderadoController::class, 'store']);
