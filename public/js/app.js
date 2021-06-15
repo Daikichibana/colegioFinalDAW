@@ -2116,179 +2116,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  data: function data() {
-    return {
-      hola: {},
-      id: 0,
-      estudiante: '',
-      idEstudiante: 0,
-      curso: '',
-      idCurso: 0,
-      materia: '',
-      idMateria: 0,
-      docente: '',
-      idDocente: 0,
-      paralelo: '',
-      idParalelo: 0,
-      gestion: '',
-      idGestion: 0,
-      buscar: '',
-      buscarEstudiante: '',
-      buscarCurso: '',
-      buscarMateria: '',
-      buscarDocente: '',
-      buscarParalelo: '',
-      arrayAsignacion: [],
-      arrayCurso: [],
-      arrayEstudiante: [],
-      arrayMateria: [],
-      arrayDocente: [],
-      arrayParalelo: [],
-      arrayGestion: []
-    };
-  },
-  methods: {
-    listar: function listar(buscar) {
-      var me = this;
-      var url = '/asignacioncursoestudiante?buscar=' + buscar;
-      axios.get(url).then(function (response) {
-        me.arrayAsignacion = response.data;
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    listarCurso: function listarCurso(buscarCursoMateria) {
-      var me = this;
-      var url = '/asignacioncursoestudiante/?buscarcursomateria?buscar=' + buscarCursoMateria;
-      axios.get(url).then(function (response) {
-        me.arrayCurso = response.data;
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    listarEstudiante: function listarEstudiante(buscarEstudiante) {
-      var me = this;
-      var url = '/estudiante?buscar=' + buscarEstudiante;
-      axios.get(url).then(function (response) {
-        me.arrayEstudiante = response.data;
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    guardar: function guardar() {
-      var me = this;
-      console.log(this.curso);
-      console.log(this.estudiante);
-      axios.post('/asignacioncursoestudiante/registrar', {
-        'codMateriaCurso': this.curso,
-        'codEstudiante': this.estudiante
-      }).then(function (error) {
-        me.listar('');
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    modificar: function modificar() {
-      var me = this;
-      axios.put('/asignacioncursoestudiante/modificar', {
-        'codMateriaCurso': this.curso,
-        'codEstudiante': this.estudiante,
-        'id': this.id
-      }).then(function (error) {
-        me.listar('');
-      })["catch"](function (error) {
-        console.log(error);
-      });
-      this.nuevo();
-    },
-    eliminar: function eliminar() {
-      var me = this;
-      axios.put('/asignacioncursoestudiante/eliminar', {
-        'id': this.id
-      }).then(function (error) {
-        me.listar('');
-      })["catch"](function (error) {
-        console.log(error);
-      });
-      this.nuevo();
-    },
-    nuevo: function nuevo() {
-      this.curso = '';
-      this.estudiante = '';
-    },
-    llenar: function llenar() {
-      var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-      this.id = data['Id'];
-      this.estudiante = data['codEstudiante'];
-      this.curso = data['codMateriaCurso'];
-    }
-  },
-  mounted: function mounted() {
-    this.listar('');
-    this.listarCurso('');
-    this.listarEstudiante('');
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/frmAsignarCursoGestion.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/frmAsignarCursoGestion.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -2427,8 +2254,185 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  mounted: function mounted() {}
+  data: function data() {
+    return {
+      hola: {},
+      id: 0,
+      estudiante: '',
+      idEstudiante: 0,
+      curso: '',
+      idCurso: 0,
+      materia: '',
+      idMateria: 0,
+      docente: '',
+      idDocente: 0,
+      paralelo: '',
+      idParalelo: 0,
+      gestion: '',
+      idGestion: 0,
+      buscar: '',
+      buscarEstudiante: '',
+      buscarCurso: '',
+      buscarMateria: '',
+      buscarDocente: '',
+      buscarParalelo: '',
+      arrayAsignacion: [],
+      arrayCurso: [],
+      arrayEstudiante: [],
+      arrayMateria: [],
+      arrayDocente: [],
+      arrayParalelo: [],
+      arrayGestion: []
+    };
+  },
+  methods: {
+    listar: function listar(buscar) {
+      var me = this;
+      var url = '/asignacioncursoestudiante?buscar=' + buscar;
+      axios.get(url).then(function (response) {
+        me.arrayAsignacion = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    listarCurso: function listarCurso(buscarCursoMateria) {
+      var me = this;
+      var url = '/asignacioncursoestudiante/?buscarcursomateria?buscar=' + buscarCursoMateria;
+      axios.get(url).then(function (response) {
+        me.arrayCurso = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    listarEstudiante: function listarEstudiante(buscarEstudiante) {
+      var me = this;
+      var url = '/estudiante?buscar=' + buscarEstudiante;
+      axios.get(url).then(function (response) {
+        me.arrayEstudiante = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    guardar: function guardar() {
+      var me = this;
+      console.log(this.curso);
+      console.log(this.estudiante);
+      axios.post('/asignacioncursoestudiante/registrar', {
+        'codMateriaCurso': this.curso,
+        'codEstudiante': this.estudiante
+      }).then(function (error) {
+        me.listar('');
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    modificar: function modificar() {
+      var me = this;
+      axios.put('/asignacioncursoestudiante/modificar', {
+        'codMateriaCurso': this.curso,
+        'codEstudiante': this.estudiante,
+        'id': this.id
+      }).then(function (error) {
+        me.listar('');
+      })["catch"](function (error) {
+        console.log(error);
+      });
+      this.nuevo();
+    },
+    eliminar: function eliminar() {
+      var me = this;
+      axios.put('/asignacioncursoestudiante/eliminar', {
+        'id': this.id
+      }).then(function (error) {
+        me.listar('');
+      })["catch"](function (error) {
+        console.log(error);
+      });
+      this.nuevo();
+    },
+    nuevo: function nuevo() {
+      this.curso = '';
+      this.estudiante = '';
+    },
+    llenar: function llenar() {
+      var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+      this.id = data['Id'];
+      this.estudiante = data['codEstudiante'];
+      this.curso = data['codMateriaCurso'];
+    }
+  },
+  mounted: function mounted() {
+    this.listar('');
+    this.listarCurso('');
+    this.listarEstudiante('');
+  }
 });
 
 /***/ }),
@@ -43221,11 +43225,6 @@ var render = function() {
               )
             }),
             0
-          ),
-          _vm._v(
-            "\n            " +
-              _vm._s(_vm.estudiante) +
-              "\n            \n        "
           )
         ]),
         _vm._v(" "),
