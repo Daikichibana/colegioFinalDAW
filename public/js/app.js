@@ -2133,6 +2133,87 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      id: 0,
+      año: '',
+      buscar: '',
+      arrayBusqueda: []
+    };
+  },
+  methods: {
+    listar: function listar(buscar) {
+      var me = this;
+      var url = '/consultarCali?buscar=' + buscar + '&buscar2=' + me.id;
+      axios.get(url).then(function (response) {
+        me.arrayBusqueda = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    listarEstudiante: function listarEstudiante(buscar) {
+      var me = this;
+      var url = '/buscarIdEstudiante?buscar=' + buscar;
+      axios.get(url).then(function (response) {
+        me.id = response.data[0].id;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    }
+  },
+  mounted: function mounted() {
+    var usuarioLogeadoId = document.head.querySelector('meta[name="user"]');
+    var usuarioLogeadoRol = document.head.querySelector('meta[name="role"]');
+
+    switch (usuarioLogeadoRol.content) {
+      case "Estudiante":
+        this.listarEstudiante(usuarioLogeadoId.content);
+        break;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/frmCursos.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/frmCursos.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -44112,15 +44193,125 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container" }, [
+    _c("h1", [_vm._v("Consultar Calificaciones")]),
+    _vm._v(" "),
+    _c("form", { attrs: { action: "", method: "$POST" } }, [
+      _c("table", [
+        _c("tr", [
+          _c("td", { attrs: { colspan: "3" } }, [
+            _c("br"),
+            _vm._v(" "),
+            _c("br"),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.buscar,
+                  expression: "buscar"
+                }
+              ],
+              attrs: { type: "text", placeholder: "Año" },
+              domProps: { value: _vm.buscar },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.buscar = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    return _vm.listar(_vm.buscar)
+                  }
+                }
+              },
+              [_vm._v("Buscar por Año")]
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("br")
+    ]),
+    _vm._v(" "),
+    _c("table", { attrs: { border: "1" } }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "tbody",
+        _vm._l(_vm.arrayBusqueda, function(detallecalificacion) {
+          return _c("tr", { key: detallecalificacion.id }, [
+            _c("td", {
+              domProps: { textContent: _vm._s(detallecalificacion.Materia) }
+            }),
+            _vm._v(" "),
+            _c("td", {
+              domProps: { textContent: _vm._s(detallecalificacion.Obs) }
+            }),
+            _vm._v(" "),
+            _c("td", {
+              domProps: { textContent: _vm._s(detallecalificacion.Gestion) }
+            }),
+            _vm._v(" "),
+            _c("td", {
+              domProps: { textContent: _vm._s(detallecalificacion.Ser) }
+            }),
+            _vm._v(" "),
+            _c("td", {
+              domProps: { textContent: _vm._s(detallecalificacion.Saber) }
+            }),
+            _vm._v(" "),
+            _c("td", {
+              domProps: { textContent: _vm._s(detallecalificacion.Hacer) }
+            }),
+            _vm._v(" "),
+            _c("td", {
+              domProps: { textContent: _vm._s(detallecalificacion.Decidir) }
+            }),
+            _vm._v(" "),
+            _c("td", {
+              domProps: { textContent: _vm._s(detallecalificacion.Bimestre) }
+            })
+          ])
+        }),
+        0
+      )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("h1", [_vm._v("Consultar Calificaciones")])
+    return _c("thead", [
+      _c("th", [_vm._v("Materia")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Observacion")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Gestion")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Ser")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Saber")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Hacer")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Decidir")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Bimestre")])
     ])
   }
 ]
