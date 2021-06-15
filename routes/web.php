@@ -71,3 +71,7 @@ Route::get('/aula',[App\Http\Controllers\AulaController::class, 'index']);
 Route::post('/aula/registrar',[App\Http\Controllers\AulaController::class, 'store']);
 Route::put('/aula/modificar',[App\Http\Controllers\AulaController::class, 'update']);
 Route::put('/aula/eliminar',[App\Http\Controllers\AulaController::class, 'delete']);
+
+//Consulta Nota
+Route::get('/consultarCali',[App\Http\Controllers\ConsultarCalificacion::class, 'consultarCalificacion']);
+Route::get('/buscarIdEstudiante',[App\Http\Controllers\ConsultarCalificacion::class, 'buscarEstudiante']);
