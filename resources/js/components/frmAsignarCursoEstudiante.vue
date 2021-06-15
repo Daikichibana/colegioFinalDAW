@@ -12,17 +12,14 @@
                     {{estudiantes.nombre}} 
                 </option>
                 </select>
-                {{estudiante}}
                 
             </tr>
              <tr>
                 <td> MateriaCurso </td>
                 <select v-model="curso" placeholder="Curso" >
-                <option v-text="cursos.curso_nombre + ' ' + cursos.paralelo_nombre + ' ' + cursos.gestion_nombre" v-for="cursos in arrayCurso" :key="cursos.id" :value="cursos.id">
-                    {{cursos.nombre}}
+                <option v-text="cursos.Curso + ' ' + cursos.Paralelo + ' ' + cursos.Gestion" v-for="cursos in arrayCurso" :key="cursos.id" :value="cursos.codMateriaCurso">
                 </option>
                 </select>
-                {{curso}}
             </tr>
             <tr>
                 <td colspan="3">
@@ -47,17 +44,25 @@
          <th>Id</th>
           <th style="display:none;">estudiante</th>
           <th>Nombre estudiante</th>
-          <th>MateriaCurso</th>
+        <th style="display:none;">MateriaCurso</th>
+          <th>Curso</th>
+          <th>Materia</th>
+          <th>Docente</th>
+          <th>Paralelo</th>
+          <th>Gestion</th>
         </thead>
         <tbody>
-          <tr v-for="asignacion in arrayAsignacion" :key="asignacion.id">
-            <td v-text="asignacion.id"></td>
-            <td style="display:none;" v-text="asignacion.codEstudiante"></td>
-            <td v-text="asignacion.nombreEstudiante"></td>
-            <td style="display:none;" v-text="asignacion.codMateriaCurso"></td>
-            <td v-text="asignacion.nombreCurso "></td>
-            <td v-text="asignacion.cursoMateria"></td>
-            <td><a href="#" @click="llenar(asignacion)">Seleccionar</a></td>
+          <tr v-for="asignacionestudiantecurso in arrayAsignacion" :key="asignacionestudiantecurso.id">
+            <td v-text="asignacionestudiantecurso.Id"></td>
+            <td style="display:none;" v-text="asignacionestudiantecurso.codEstudiante"></td>
+            <td v-text="asignacionestudiantecurso.Nombre"></td>
+            <td style="display:none;" v-text="asignacionestudiantecurso.codMateriaCurso"></td>
+            <td v-text="asignacionestudiantecurso.Curso "></td>
+            <td v-text="asignacionestudiantecurso.Materia"></td>
+            <td v-text="asignacionestudiantecurso.Docente "></td>
+            <td v-text="asignacionestudiantecurso.Paralelo "></td>
+            <td v-text="asignacionestudiantecurso.Gestion "></td>
+            <td><a href="#" @click="llenar(asignacionestudiantecurso)">Seleccionar</a></td>
           </tr>
         </tbody>
       </table>
@@ -75,12 +80,27 @@
                 idEstudiante: 0,
                 curso: '',
                 idCurso: 0,
+                materia:'',
+                idMateria:0,
+                docente:'',
+                idDocente:0,
+                paralelo:'',
+                idParalelo:0,
+                gestion:'',
+                idGestion:0,
                 buscar: '',
                 buscarEstudiante: '',
                 buscarCurso: '',
+                buscarMateria: '',
+                buscarDocente: '',
+                buscarParalelo: '',
                 arrayAsignacion: [],
                 arrayCurso: [],
-                arrayEstudiante: []
+                arrayEstudiante: [],
+                arrayMateria: [],
+                arrayDocente: [],
+                arrayParalelo: [],
+                arrayGestion: [],
             }
         },
         methods: {
@@ -118,9 +138,12 @@
             
           guardar(){
                 let me = this;
+                  console.log(this.curso);
+                      console.log(this.estudiante);
                 axios.post('/asignacioncursoestudiante/registrar',{
                     'codMateriaCurso': this.curso,
                     'codEstudiante': this.estudiante,
+                  
                     
 
                 }).then(function(error){
@@ -159,7 +182,7 @@
           
             },
             llenar(data=[]){
-                this.id=data['id'];
+                this.id=data['Id'];
                 this.estudiante=data['codEstudiante'];
                 this.curso=data['codMateriaCurso'];
                 

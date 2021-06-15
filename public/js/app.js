@@ -2127,6 +2127,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2136,12 +2142,27 @@ __webpack_require__.r(__webpack_exports__);
       idEstudiante: 0,
       curso: '',
       idCurso: 0,
+      materia: '',
+      idMateria: 0,
+      docente: '',
+      idDocente: 0,
+      paralelo: '',
+      idParalelo: 0,
+      gestion: '',
+      idGestion: 0,
       buscar: '',
       buscarEstudiante: '',
       buscarCurso: '',
+      buscarMateria: '',
+      buscarDocente: '',
+      buscarParalelo: '',
       arrayAsignacion: [],
       arrayCurso: [],
-      arrayEstudiante: []
+      arrayEstudiante: [],
+      arrayMateria: [],
+      arrayDocente: [],
+      arrayParalelo: [],
+      arrayGestion: []
     };
   },
   methods: {
@@ -2174,6 +2195,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     guardar: function guardar() {
       var me = this;
+      console.log(this.curso);
+      console.log(this.estudiante);
       axios.post('/asignacioncursoestudiante/registrar', {
         'codMateriaCurso': this.curso,
         'codEstudiante': this.estudiante
@@ -2213,7 +2236,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     llenar: function llenar() {
       var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-      this.id = data['id'];
+      this.id = data['Id'];
       this.estudiante = data['codEstudiante'];
       this.curso = data['codMateriaCurso'];
     }
@@ -42620,33 +42643,18 @@ var render = function() {
               }
             },
             _vm._l(_vm.arrayCurso, function(cursos) {
-              return _c(
-                "option",
-                {
-                  key: cursos.id,
-                  domProps: {
-                    value: cursos.id,
-                    textContent: _vm._s(
-                      cursos.curso_nombre +
-                        " " +
-                        cursos.paralelo_nombre +
-                        " " +
-                        cursos.gestion_nombre
-                    )
-                  }
-                },
-                [
-                  _vm._v(
-                    "\n                " +
-                      _vm._s(cursos.nombre) +
-                      "\n            "
+              return _c("option", {
+                key: cursos.id,
+                domProps: {
+                  value: cursos.codMateriaCurso,
+                  textContent: _vm._s(
+                    cursos.Curso + " " + cursos.Paralelo + " " + cursos.Gestion
                   )
-                ]
-              )
+                }
+              })
             }),
             0
-          ),
-          _vm._v("\n            " + _vm._s(_vm.curso) + "\n        ")
+          )
         ]),
         _vm._v(" "),
         _c("tr", [
@@ -42755,30 +42763,60 @@ var render = function() {
         _vm._v(" "),
         _c(
           "tbody",
-          _vm._l(_vm.arrayAsignacion, function(asignacion) {
-            return _c("tr", { key: asignacion.id }, [
-              _c("td", { domProps: { textContent: _vm._s(asignacion.id) } }),
-              _vm._v(" "),
+          _vm._l(_vm.arrayAsignacion, function(asignacionestudiantecurso) {
+            return _c("tr", { key: asignacionestudiantecurso.id }, [
               _c("td", {
-                staticStyle: { display: "none" },
-                domProps: { textContent: _vm._s(asignacion.codEstudiante) }
-              }),
-              _vm._v(" "),
-              _c("td", {
-                domProps: { textContent: _vm._s(asignacion.nombreEstudiante) }
+                domProps: { textContent: _vm._s(asignacionestudiantecurso.Id) }
               }),
               _vm._v(" "),
               _c("td", {
                 staticStyle: { display: "none" },
-                domProps: { textContent: _vm._s(asignacion.codMateriaCurso) }
+                domProps: {
+                  textContent: _vm._s(asignacionestudiantecurso.codEstudiante)
+                }
               }),
               _vm._v(" "),
               _c("td", {
-                domProps: { textContent: _vm._s(asignacion.nombreCurso) }
+                domProps: {
+                  textContent: _vm._s(asignacionestudiantecurso.Nombre)
+                }
               }),
               _vm._v(" "),
               _c("td", {
-                domProps: { textContent: _vm._s(asignacion.cursoMateria) }
+                staticStyle: { display: "none" },
+                domProps: {
+                  textContent: _vm._s(asignacionestudiantecurso.codMateriaCurso)
+                }
+              }),
+              _vm._v(" "),
+              _c("td", {
+                domProps: {
+                  textContent: _vm._s(asignacionestudiantecurso.Curso)
+                }
+              }),
+              _vm._v(" "),
+              _c("td", {
+                domProps: {
+                  textContent: _vm._s(asignacionestudiantecurso.Materia)
+                }
+              }),
+              _vm._v(" "),
+              _c("td", {
+                domProps: {
+                  textContent: _vm._s(asignacionestudiantecurso.Docente)
+                }
+              }),
+              _vm._v(" "),
+              _c("td", {
+                domProps: {
+                  textContent: _vm._s(asignacionestudiantecurso.Paralelo)
+                }
+              }),
+              _vm._v(" "),
+              _c("td", {
+                domProps: {
+                  textContent: _vm._s(asignacionestudiantecurso.Gestion)
+                }
               }),
               _vm._v(" "),
               _c("td", [
@@ -42788,7 +42826,7 @@ var render = function() {
                     attrs: { href: "#" },
                     on: {
                       click: function($event) {
-                        return _vm.llenar(asignacion)
+                        return _vm.llenar(asignacionestudiantecurso)
                       }
                     }
                   },
@@ -42815,7 +42853,17 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Nombre estudiante")]),
       _vm._v(" "),
-      _c("th", [_vm._v("MateriaCurso")])
+      _c("th", { staticStyle: { display: "none" } }, [_vm._v("MateriaCurso")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Curso")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Materia")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Docente")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Paralelo")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Gestion")])
     ])
   }
 ]
