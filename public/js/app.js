@@ -2120,6 +2120,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2127,13 +2134,13 @@ __webpack_require__.r(__webpack_exports__);
       id: 0,
       estudiante: '',
       idEstudiante: 0,
-      materiacurso: '',
-      idMateriaCurso: 0,
+      curso: '',
+      idCurso: 0,
       buscar: '',
       buscarEstudiante: '',
-      buscarMateriaCurso: '',
+      buscarCurso: '',
       arrayAsignacion: [],
-      arrayMateriaCurso: [],
+      arrayCurso: [],
       arrayEstudiante: []
     };
   },
@@ -2147,18 +2154,18 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       });
     },
-    listarMateriaCurso: function listarMateriaCurso(buscarMateriaCurso) {
+    listarCurso: function listarCurso(buscarCursoMateria) {
       var me = this;
-      var url = '/materiacurso?buscar=' + buscarMateriaCurso;
+      var url = '/asignacioncursoestudiante/?buscarcursomateria?buscar=' + buscarCursoMateria;
       axios.get(url).then(function (response) {
-        me.arrayMateriaCurso = response.data;
+        me.arrayCurso = response.data;
       })["catch"](function (error) {
         console.log(error);
       });
     },
     listarEstudiante: function listarEstudiante(buscarEstudiante) {
       var me = this;
-      var url = '/estudiante2?buscar=' + buscarEstudiante;
+      var url = '/estudiante?buscar=' + buscarEstudiante;
       axios.get(url).then(function (response) {
         me.arrayEstudiante = response.data;
       })["catch"](function (error) {
@@ -2167,8 +2174,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     guardar: function guardar() {
       var me = this;
-      axios.post('asignacioncursoestudiante/registrar', {
-        'codMateriaCurso': this.materiacurso,
+      axios.post('/asignacioncursoestudiante/registrar', {
+        'codMateriaCurso': this.curso,
         'codEstudiante': this.estudiante
       }).then(function (error) {
         me.listar('');
@@ -2178,8 +2185,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     modificar: function modificar() {
       var me = this;
-      axios.put('asignacioncursoestudiante/modificar', {
-        'codMateriaCurso': this.materiacurso,
+      axios.put('/asignacioncursoestudiante/modificar', {
+        'codMateriaCurso': this.curso,
         'codEstudiante': this.estudiante,
         'id': this.id
       }).then(function (error) {
@@ -2187,31 +2194,33 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.log(error);
       });
+      this.nuevo();
     },
     eliminar: function eliminar() {
       var me = this;
-      axios.put('asignacioncursoestudiante/eliminar', {
+      axios.put('/asignacioncursoestudiante/eliminar', {
         'id': this.id
       }).then(function (error) {
         me.listar('');
       })["catch"](function (error) {
         console.log(error);
       });
+      this.nuevo();
     },
     nuevo: function nuevo() {
-      this.materiacurso = '';
+      this.curso = '';
       this.estudiante = '';
     },
     llenar: function llenar() {
       var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
       this.id = data['id'];
       this.estudiante = data['codEstudiante'];
-      this.materiacurso = data['codMateriaCurso'];
+      this.curso = data['codMateriaCurso'];
     }
   },
   mounted: function mounted() {
     this.listar('');
-    this.listarMateriaCurso('');
+    this.listarCurso('');
     this.listarEstudiante('');
   }
 });
@@ -42572,7 +42581,11 @@ var render = function() {
             }),
             0
           ),
-          _vm._v("\n            " + _vm._s(_vm.estudiante) + "\n            ")
+          _vm._v(
+            "\n            " +
+              _vm._s(_vm.estudiante) +
+              "\n            \n        "
+          )
         ]),
         _vm._v(" "),
         _c("tr", [
@@ -42585,8 +42598,8 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.materiacurso,
-                  expression: "materiacurso"
+                  value: _vm.curso,
+                  expression: "curso"
                 }
               ],
               attrs: { placeholder: "Curso" },
@@ -42600,23 +42613,40 @@ var render = function() {
                       var val = "_value" in o ? o._value : o.value
                       return val
                     })
-                  _vm.materiacurso = $event.target.multiple
+                  _vm.curso = $event.target.multiple
                     ? $$selectedVal
                     : $$selectedVal[0]
                 }
               }
             },
-            _vm._l(_vm.arrayMateriaCurso, function(materiacursos) {
-              return _c("option", {
-                key: materiacursos.id,
-                domProps: {
-                  value: materiacursos.id,
-                  textContent: _vm._s(materiacursos.nombre)
-                }
-              })
+            _vm._l(_vm.arrayCurso, function(cursos) {
+              return _c(
+                "option",
+                {
+                  key: cursos.id,
+                  domProps: {
+                    value: cursos.id,
+                    textContent: _vm._s(
+                      cursos.curso_nombre +
+                        " " +
+                        cursos.paralelo_nombre +
+                        " " +
+                        cursos.gestion_nombre
+                    )
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(cursos.nombre) +
+                      "\n            "
+                  )
+                ]
+              )
             }),
             0
-          )
+          ),
+          _vm._v("\n            " + _vm._s(_vm.curso) + "\n        ")
         ]),
         _vm._v(" "),
         _c("tr", [
@@ -42730,11 +42760,25 @@ var render = function() {
               _c("td", { domProps: { textContent: _vm._s(asignacion.id) } }),
               _vm._v(" "),
               _c("td", {
+                staticStyle: { display: "none" },
                 domProps: { textContent: _vm._s(asignacion.codEstudiante) }
               }),
               _vm._v(" "),
               _c("td", {
+                domProps: { textContent: _vm._s(asignacion.nombreEstudiante) }
+              }),
+              _vm._v(" "),
+              _c("td", {
+                staticStyle: { display: "none" },
                 domProps: { textContent: _vm._s(asignacion.codMateriaCurso) }
+              }),
+              _vm._v(" "),
+              _c("td", {
+                domProps: { textContent: _vm._s(asignacion.nombreCurso) }
+              }),
+              _vm._v(" "),
+              _c("td", {
+                domProps: { textContent: _vm._s(asignacion.cursoMateria) }
               }),
               _vm._v(" "),
               _c("td", [
@@ -42767,7 +42811,9 @@ var staticRenderFns = [
     return _c("thead", [
       _c("th", [_vm._v("Id")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Estudiante")]),
+      _c("th", { staticStyle: { display: "none" } }, [_vm._v("estudiante")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Nombre estudiante")]),
       _vm._v(" "),
       _c("th", [_vm._v("MateriaCurso")])
     ])

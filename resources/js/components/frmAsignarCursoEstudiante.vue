@@ -13,13 +13,16 @@
                 </option>
                 </select>
                 {{estudiante}}
-                <!--v-text="gestions.año"-->
+                
             </tr>
-            <tr>
+             <tr>
                 <td> MateriaCurso </td>
-                <select v-model="materiacurso" placeholder="Curso" >
-                <option v-text="materiacursos.nombre" v-for="materiacursos in arrayMateriaCurso" :key="materiacursos.id" :value="materiacursos.id"></option>
+                <select v-model="curso" placeholder="Curso" >
+                <option v-text="cursos.curso_nombre + ' ' + cursos.paralelo_nombre + ' ' + cursos.gestion_nombre" v-for="cursos in arrayCurso" :key="cursos.id" :value="cursos.id">
+                    {{cursos.nombre}}
+                </option>
                 </select>
+                {{curso}}
             </tr>
             <tr>
                 <td colspan="3">
@@ -41,15 +44,19 @@
         <br>
         <table border="1">
         <thead>
-          <th>Id</th>
-          <th>Estudiante</th>
+         <th>Id</th>
+          <th style="display:none;">estudiante</th>
+          <th>Nombre estudiante</th>
           <th>MateriaCurso</th>
         </thead>
         <tbody>
           <tr v-for="asignacion in arrayAsignacion" :key="asignacion.id">
             <td v-text="asignacion.id"></td>
-            <td v-text="asignacion.codEstudiante"></td>
-            <td v-text="asignacion.codMateriaCurso"></td>
+            <td style="display:none;" v-text="asignacion.codEstudiante"></td>
+            <td v-text="asignacion.nombreEstudiante"></td>
+            <td style="display:none;" v-text="asignacion.codMateriaCurso"></td>
+            <td v-text="asignacion.nombreCurso "></td>
+            <td v-text="asignacion.cursoMateria"></td>
             <td><a href="#" @click="llenar(asignacion)">Seleccionar</a></td>
           </tr>
         </tbody>
@@ -66,13 +73,13 @@
                 id: 0,
                 estudiante: '',
                 idEstudiante: 0,
-                materiacurso: '',
-                idMateriaCurso: 0,
+                curso: '',
+                idCurso: 0,
                 buscar: '',
                 buscarEstudiante: '',
-                buscarMateriaCurso: '',
+                buscarCurso: '',
                 arrayAsignacion: [],
-                arrayMateriaCurso: [],
+                arrayCurso: [],
                 arrayEstudiante: []
             }
         },
@@ -87,11 +94,11 @@
                     console.log(error);
                 });
             },
-            listarMateriaCurso(buscarMateriaCurso){
+            listarCurso(buscarCursoMateria){
                 let me = this;
-                var url='/materiacurso?buscar='+buscarMateriaCurso;
+                var url='/asignacioncursoestudiante/?buscarcursomateria?buscar='+buscarCursoMateria;
                 axios.get(url).then(function(response){
-                    me.arrayMateriaCurso= response.data;
+                    me.arrayCurso= response.data;
                 })
                 .catch(function(error){
 
@@ -100,7 +107,7 @@
             },
             listarEstudiante(buscarEstudiante){
                 let me = this;
-                var url='/estudiante2?buscar='+buscarEstudiante;
+                var url='/estudiante?buscar='+buscarEstudiante;
                 axios.get(url).then(function(response){
                     me.arrayEstudiante= response.data;
                 })
@@ -108,11 +115,13 @@
                     console.log(error);
                 });
             },
-            guardar(){
+            
+          guardar(){
                 let me = this;
-                axios.post('asignacioncursoestudiante/registrar',{
-                    'codMateriaCurso': this.materiacurso,
+                axios.post('/asignacioncursoestudiante/registrar',{
+                    'codMateriaCurso': this.curso,
                     'codEstudiante': this.estudiante,
+                    
 
                 }).then(function(error){
                     me.listar('');
@@ -122,40 +131,44 @@
             },
             modificar(){
                 let me = this;
-                axios.put('asignacioncursoestudiante/modificar',{
-                    'codMateriaCurso': this.materiacurso,
-                    'codEstudiante': this.estudiante,
+                axios.put('/asignacioncursoestudiante/modificar',{
+                    'codMateriaCurso': this.curso,
+                    'codEstudiante': this.estudiante, 
                     'id': this.id,
                 }).then(function(error){
                     me.listar('');
                 }).catch(function(error){
                     console.log(error);
-                });               
+                });      
+                this.nuevo();         
             },
             eliminar(){
                 let me = this;
-                axios.put('asignacioncursoestudiante/eliminar',{
+                axios.put('/asignacioncursoestudiante/eliminar',{
                   'id': this.id,
                 }).then(function(error){
                     me.listar('');
                 }).catch(function(error){
                     console.log(error);
-                });               
+                });   
+                 this.nuevo();            
             },
             nuevo(){
-                this.materiacurso='';
+                this.curso='';
                 this.estudiante='';
+          
             },
             llenar(data=[]){
                 this.id=data['id'];
                 this.estudiante=data['codEstudiante'];
-                this.materiacurso=data['codMateriaCurso'];
+                this.curso=data['codMateriaCurso'];
+                
             },
         },
         mounted() {
             this.listar('');
-            this.listarMateriaCurso('');
-            this.listarEstudiante('');           
+            this.listarCurso('');
+            this.listarEstudiante('');            
         }
     }
 </script>
