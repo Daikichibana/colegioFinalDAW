@@ -749,7 +749,7 @@ export default {
         });
     },
 
-    eliminarDetalle(index) {
+  eliminarDetalle(index) {
     this.arrayDetalle.splice(index, 1);
   },
 
