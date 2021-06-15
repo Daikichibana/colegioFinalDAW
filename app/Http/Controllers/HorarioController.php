@@ -40,5 +40,17 @@ class HorarioController extends Controller
     public function delete(Request $request){
         $horario = Horario::findOrFail($request->id);
         $horario->delete();
-    }    
+    }
+    
+    public function buscarHorarioPorId(Request $request){
+        $buscar= $request->buscar;
+        if($buscar==''){
+            $horario=Horario::all();
+        }
+        else{
+            $horario=Horario::where('id','=', $buscar)
+            ->get();}
+        
+        return $horario;
+    }
 }

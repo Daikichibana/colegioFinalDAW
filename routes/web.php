@@ -130,3 +130,14 @@ Route::put('/asignacioncursomateria/eliminar',[App\Http\Controllers\AsignacionCu
 Route::get('/asignacioncursomateria/buscarmateria',[App\Http\Controllers\MateriaController::class, 'buscarMateriaPorId']);
 Route::get('/asignacioncursomateria/buscarcursogestion',[App\Http\Controllers\AsignacionGestionCursoController::class, 'buscarCursoPorId']);
 Route::get('/asignacioncursomateria/buscardocente',[App\Http\Controllers\DocenteController::class, 'buscarDocentePorId']);
+
+
+//Asignacion Curso, Materia y Gestion
+Route::get('/armarhorario',[App\Http\Controllers\AsignacionHorarioCursoController::class, 'index']);
+Route::post('/armarhorario/registrar',[App\Http\Controllers\AsignacionHorarioCursoController::class, 'store']);
+Route::put('/armarhorario/modificar',[App\Http\Controllers\AsignacionHorarioCursoController::class, 'update']);
+Route::put('/armarhorario/eliminar',[App\Http\Controllers\AsignacionHorarioCursoController::class, 'delete']);
+
+Route::get('/armarhorario/buscarhorario',[App\Http\Controllers\HorarioController::class, 'buscarHorarioPorId']);
+Route::get('/armarhorario/buscarmateriacurso',[App\Http\Controllers\AsignacionCursoMateriaController::class, 'buscarMateriaCursoPorId']);
+Route::get('/armarhorario/buscaraula',[App\Http\Controllers\AulaController::class, 'buscarAulaPorId']);
