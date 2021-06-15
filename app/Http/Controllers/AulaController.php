@@ -38,4 +38,15 @@ class AulaController extends Controller
         $Aula = Aula::findOrFail($request->id);
         $Aula->delete();
     }
+    public function buscarAulaPorId(Request $request){
+        $buscar= $request->buscar;
+        if($buscar==''){
+            $Aula=Aula::all();
+        }
+        else{
+            $Aula=Aula::where('id','=', $buscar)
+            ->get();}
+        
+        return $Aula;
+    }
 }
