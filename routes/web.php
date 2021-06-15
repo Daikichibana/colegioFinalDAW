@@ -110,7 +110,6 @@ Route::put('/turno/modificar',[App\Http\Controllers\TurnoController::class, 'upd
 Route::put('/turno/eliminar',[App\Http\Controllers\TurnoController::class, 'delete']);
 
 //Asignacion Curso Gestion
-
 Route::get('/asignacioncursogestion',[App\Http\Controllers\AsignacionGestionCursoController::class, 'index']);
 Route::post('/asignacioncursogestion/registrar',[App\Http\Controllers\AsignacionGestionCursoController::class, 'store']);
 Route::put('/asignacioncursogestion/modificar',[App\Http\Controllers\AsignacionGestionCursoController::class, 'update']);
@@ -122,3 +121,14 @@ Route::get('/asignacioncursoestudiante',[App\Http\Controllers\AsignacionEstudian
 Route::post('/asignacioncursoestudiante/registrar',[App\Http\Controllers\AsignacionEstudianteCursoController::class, 'store']);
 Route::put('/asignacioncursoestudiante/modificar',[App\Http\Controllers\AsignacionEstudianteCursoController::class, 'update']);
 Route::put('/asignacioncursoestudiante/eliminar',[App\Http\Controllers\AsignacionEstudianteCursoController::class, 'delete']);
+
+//Asignacion Curso, Materia y Gestion
+
+Route::get('/asignacioncursomateria',[App\Http\Controllers\AsignacionCursoMateriaController::class, 'index']);
+Route::post('/asignacioncursomateria/registrar',[App\Http\Controllers\AsignacionCursoMateriaController::class, 'store']);
+Route::put('/asignacioncursomateria/modificar',[App\Http\Controllers\AsignacionCursoMateriaController::class, 'update']);
+Route::put('/asignacioncursomateria/eliminar',[App\Http\Controllers\AsignacionCursoMateriaController::class, 'delete']);
+
+Route::get('/asignacioncursomateria/buscarmateria',[App\Http\Controllers\MateriaController::class, 'buscarMateriaPorId']);
+Route::get('/asignacioncursomateria/buscarcursogestion',[App\Http\Controllers\AsignacionGestionCursoController::class, 'buscarCursoPorId']);
+Route::get('/asignacioncursomateria/buscardocente',[App\Http\Controllers\DocenteController::class, 'buscarDocentePorId']);

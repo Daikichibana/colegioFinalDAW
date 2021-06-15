@@ -73,4 +73,38 @@ class AsignacionGestionCursoController extends Controller
         }
         return $s;
     }
+
+    public function buscarCursoPorId(Request $request){
+
+        $buscar= $request->buscar;
+        if($buscar==''){
+            $s=DB::table('asignaciongestioncurso')
+            ->join('gestion', 'codGestion', '=', 'gestion.id')
+            ->join('curso', 'codCurso', '=', 'curso.id')
+            ->join('paralelo', 'codParalelo', '=', 'paralelo.id')
+            ->select('asignaciongestioncurso.id',  
+                        'curso.nombre as curso_nombre', 
+                        'gestion.año as gestion_nombre',
+                        'paralelo.nombre as paralelo_nombre'
+                    )
+            ->orderBy('id', 'asc')
+            ->get();
+        }
+
+        else{
+             $s=DB::table('asignaciongestioncurso')
+             ->join('gestion', 'codGestion', '=', 'gestion.id')
+             ->join('curso', 'codCurso', '=', 'curso.id')
+             ->join('paralelo', 'codParalelo', '=', 'paralelo.id')
+             ->select('asignaciongestioncurso.id',  
+                         'curso.nombre as curso_nombre', 
+                         'gestion.año as gestion_nombre',
+                         'paralelo.nombre as paralelo_nombre'
+                     )
+             ->where('curso.id','=', $buscar)
+             ->orderBy('id', 'asc')
+             ->get();
+        }
+        return $s;
+    }
 }

@@ -50,6 +50,7 @@
               data-target="#modalCurso"
               >Buscar Curso</a
             >
+            <!--
             <a
               href="#"
               @click="frmVerificarNotas()"
@@ -58,6 +59,7 @@
               style="margin-left: 15px"
               >Verificar Notas</a
             >
+            -->
           </tr>
           <tr>
             <td>Fecha</td>
