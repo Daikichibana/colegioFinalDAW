@@ -8,33 +8,37 @@ use DB;
 
 class CalificacionController extends Controller
 {
-    public function cabecera(Request $request){
+    public function index(Request $request){
         $buscar= $request->buscar;
         if($buscar==''){
-            $calificacion = DB::table('calificacion')->join('asignacionestudiantecurso','codEstudiante','=','asignacionestudiantecurso.id')->join('estudiante','asignacionestudiantecurso.codEstudiante', '=', 'estudiante.id')->join('asignacionmateriacurso','asignacionestudiantecurso.codMateriaCurso','=','asignacionmateriacurso.id')->join('materia','asignacionmateriacurso.codMateria','=','materia.id')->join('asignaciongestioncurso','asignacionmateriacurso.codCursoGestion','=','asignaciongestioncurso.id')->join('curso','asignaciongestioncurso.codCurso','=','curso.id')->select('calificacion.id','calificacion.observacion','calificacion.codEstudianteCurso as idAEstudianteCurso')->get();
+            $calificacion=DB::table('detallecalificacion')->join('bimestre', 'codBimestre', '=', 'bimestre.id')->join('calificacion', 'codCalificacion', '=', 'calificacion.id')->join('asignacionestudiantecurso', 'codEstudianteCurso', '=', 'asignacionestudiantecurso.id')->join('estudiante', 'codEstudiante', '=', 'estudiante.id')->join('asignacionmateriacurso', 'codMateriaCurso', '=', 'asignacionmateriacurso.id')->join('materia', 'codMateria', '=', 'materia.id')->join('asignaciongestioncurso', 'codCursoGestion', '=', 'asignaciongestioncurso.id')->join('gestion', 'codGestion', '=', 'gestion.id')->select('estudiante.nombre as Estudiante','materia.nombre as Materia','calificacion.observacion as Obs','gestion.año as Gestion','detallecalificacion.notaSer as Ser','detallecalificacion.notaSaber as Saber','detallecalificacion.notaHacer as Hacer','detallecalificacion.notaDecidir as Decidir','bimestre.bimestre as Bimestre')->get();
+            return $calificacion;            
         }
         else{
-            $calificacion=Calificacion::where('id','=',$buscar)->get();
+            $calificacion=DB::table('detallecalificacion')->join('bimestre', 'codBimestre', '=', 'bimestre.id')->join('calificacion', 'codCalificacion', '=', 'calificacion.id')->join('asignacionestudiantecurso', 'codEstudianteCurso', '=', 'asignacionestudiantecurso.id')->join('estudiante', 'codEstudiante', '=', 'estudiante.id')->join('asignacionmateriacurso', 'codMateriaCurso', '=', 'asignacionmateriacurso.id')->join('materia', 'codMateria', '=', 'materia.id')->join('asignaciongestioncurso', 'codCursoGestion', '=', 'asignaciongestioncurso.id')->join('gestion', 'codGestion', '=', 'gestion.id')->select('estudiante.nombre as Estudiante','materia.nombre as Materia','calificacion.observacion as Obs','gestion.año as Gestion','detallecalificacion.notaSer as Ser','detallecalificacion.notaSaber as Saber','detallecalificacion.notaHacer as Hacer','detallecalificacion.notaDecidir as Decidir','bimestre.bimestre as Bimestre')->where('estudiante.nombre','=',$buscar)->get();
+            return $calificacion;
         }
-        
-        return $calificacion;
     }
-
-    public function store(Request $request){
-        $calificacion = new Calificacion;
-        $calificacion->codEstudiante=$request->codEstudiante;
-        $calificacion->codMateriaCurso=$request->codCurso;
-        $calificacion->save();
+    public function listar(Request $request){
+        $id = $request->id;
+        $calificacion=DB::table('detallecalificacion')->join('bimestre', 'codBimestre', '=', 'bimestre.id')->join('calificacion', 'codCalificacion', '=', 'calificacion.id')->join('asignacionestudiantecurso', 'codEstudianteCurso', '=', 'asignacionestudiantecurso.id')->join('estudiante', 'codEstudiante', '=', 'estudiante.id')->join('asignacionmateriacurso', 'codMateriaCurso', '=', 'asignacionmateriacurso.id')->join('materia', 'codMateria', '=', 'materia.id')->join('asignaciongestioncurso', 'codCursoGestion', '=', 'asignaciongestioncurso.id')->join('gestion', 'codGestion', '=', 'gestion.id')->select('estudiante.nombre as Estudiante','materia.nombre as Materia','calificacion.observacion as Obs','gestion.año as Gestion','detallecalificacion.notaSer as Ser','detallecalificacion.notaSaber as Saber','detallecalificacion.notaHacer as Hacer','detallecalificacion.notaDecidir as Decidir','bimestre.bimestre as Bimestre')->where('detallecalificacion.id','=',$id)->get();
+        return ['detallecalificacion'=>$calificacion];  
     }
-
     public function update(Request $request){
-        $calificacion = Calificacion::findOrFail($request->id);
-        $calificacion->codMateriaCurso=$request->codCurso;
-        $calificacion->codEstudiante=$request->codEstudiante;
+        $calificacion= DetalleCalificacion::findOrFail($request->id); 
+        $calificacion->notaSer = $request->notaSer;
+        $calificacion->notaSaber = $request->notaSaber;
+        $calificacion->notaHacer = $request->notaHacer;
+        $calificacion->notaDecidir = $request->notaDecidir;
         $calificacion->save();
     }
-    public function delete(Request $request){
-        $calificacion = Calificacion::findOrFail($request->id);
-        $calificacion->delete();
+    public function indexDetalle(Request $request){
+        $buscar=$request->buscar;
+        $s=DB::table('detallecalificacion')->join('bimestre', 'codBimestre', '=', 'bimestre.id')->join('calificacion', 'codCalificacion', '=', 'calificacion.id')->join('asignacionestudiantecurso', 'codEstudianteCurso', '=', 'asignacionestudiantecurso.id')->join('estudiante', 'codEstudiante', '=', 'estudiante.id')->join('asignacionmateriacurso', 'codMateriaCurso', '=', 'asignacionmateriacurso.id')->join('materia', 'codMateria', '=', 'materia.id')->join('asignaciongestioncurso', 'codCursoGestion', '=', 'asignaciongestioncurso.id')->join('gestion', 'codGestion', '=', 'gestion.id')->select('detallecalificacion.id as id','materia.nombre as Materia','calificacion.observacion as Obs','gestion.año as Gestion','detallecalificacion.notaSer as Ser','detallecalificacion.notaSaber as Saber','detallecalificacion.notaHacer as Hacer','detallecalificacion.notaDecidir as Decidir','bimestre.bimestre as Bimestre')->where('estudiante.nombre','like','%'.$buscar.'%')->get();
+        return $s;
     }
+    public function buscarEstCur(Request $request){
+        
+    }
+
 }
