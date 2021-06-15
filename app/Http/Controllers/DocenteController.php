@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Estudiante;
+use App\Models\Docente;
 use DB;
 
 class DocenteController extends Controller
@@ -19,6 +19,19 @@ class DocenteController extends Controller
         
         return $docente;
     }
+
+    public function buscarDocentePorId(Request $request){
+        $buscar= $request->buscar;
+        if($buscar==''){
+            $docente=Docente::all();
+        }
+        else{
+            $docente=Docente::where('id','=', $buscar)
+            ->get();}
+        
+        return $docente;
+    }
+
 
     public function store(Request $request){
         $docente = new Docente;

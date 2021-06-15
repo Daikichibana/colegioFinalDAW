@@ -20,6 +20,18 @@ class MateriaController extends Controller
         return $materia;
     }
 
+    public function buscarMateriaPorId(Request $request){
+        $buscar= $request->buscar;
+        if($buscar==''){
+            $materia=Materia::all();
+        }
+        else{
+            $materia=Materia::where('id','=', $buscar)
+            ->get();}
+        
+        return $materia;
+    }
+
     public function store(Request $request){
         $materia = new Materia;
         $materia->nombre=$request->nombre;
