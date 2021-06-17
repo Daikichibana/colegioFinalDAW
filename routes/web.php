@@ -79,7 +79,13 @@ Route::get('/consultarCali',[App\Http\Controllers\ConsultarCalificacion::class, 
 Route::get('/buscarIdEstudiante',[App\Http\Controllers\ConsultarCalificacion::class, 'buscarEstudiante']);
 
 //Calificacion
-Route::get('/consultarNotas',[App\Http\Controllers\CalificacionController::class, 'index']);
+Route::get('/calificacion',[App\Http\Controllers\CalificacionController::class, 'index']);
+Route::get('/calificacion/EstuCurso',[App\Http\Controllers\CalificacionController::class, 'indexEstuCur']);
+Route::get('/calificacion/cabecera',[App\Http\Controllers\CalificacionController::class, 'obtenerCabecera']);
+Route::get('/calificacion/detalle',[App\Http\Controllers\CalificacionController::class, 'obtenerDetalles']);
+
+Route::post('/calificacion/registrar',[App\Http\Controllers\CalificacionController::class, 'store']);
+
 Route::get('/listarNotas',[App\Http\Controllers\CalificacionController::class, 'listar']);
 
 Route::put('/calificacion/modificar',[App\Http\Controllers\CalificacionController::class, 'update']);

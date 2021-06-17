@@ -1,18 +1,16 @@
 <template>
   <div class="container">
-    <!-- menu registro de Inscripcion -->
-   
-    <template v-if="listado == 0">
+    <template v-if="listado==0">
       <center>
-      <h3>Administrar Calificaciones</h3>
-      <form action="" method="POST">
+         <h3>Administrar Calificaciones</h3>
+         <form action="" method="POST">
         <table>
           <tr>
             <td>Estudiante</td>
             <td>
               <input
                 type="hidden"
-                v-model="idEstudiante"
+                v-model="idAEstuCurso"
                 placeholder="estudiante..."
               />
               <input
@@ -37,29 +35,20 @@
             >
           </tr>
           <tr>
+            <td>Gestion</td>
+            <input
+                type="text"
+                v-model="cursoGestion"
+                placeholder="gestion..."
+                readonly
+              />
+          </tr>
+          <tr>
             <td>Curso</td>
             <td>
               <input type="hidden" v-model="idCurso" />
               <input type="text" v-model="cursoCurso" readonly />
-              <input type="text" v-model="cursoGestion" readonly />
-            </td>
-            <a
-              href="#"
-              @click="frmBuscarCurso()"
-              data-toggle="modal"
-              data-target="#modalCurso"
-              >Buscar Curso</a
-            >
-            <!--
-            <a
-              href="#"
-              @click="frmVerificarNotas()"
-              data-toggle="modal"
-              data-target="#modalNotas"
-              style="margin-left: 15px"
-              >Verificar Notas</a
-            >
-            -->
+            </td>            
           </tr>
           <tr>
               <td>Materia</td>
@@ -67,13 +56,6 @@
               <input type="hidden" v-model="idMateria" />
               <input type="text" v-model="materiaNombre" readonly />
             </td>
-            <a
-              href="#"
-              @click="frmBuscarMateria()"
-              data-toggle="modal"
-              data-target="#modalMateria"
-              >Buscar Materia</a
-            >
           </tr>
           <tr>
             <td>Observacion</td>
@@ -82,7 +64,7 @@
           <tr>
             <a
               href="#"
-              @click="frmBuscarDetalle()"
+              @click="frmBuscarBimestre()"
               data-toggle="modal"
               data-target="#modalDetalle"
               >Agregar Calificacion</a
@@ -132,12 +114,14 @@
                   v-model="detalle.notaDecidir"
                 />
               </td>
-              
               <td v-text="detalle.bimestre"></td>
 
             </tr>
           </tbody>
         </table>
+
+
+        
 
         <!-- Botones -->
         <table>
@@ -156,9 +140,51 @@
       </form>
       </center>
     </template>
-
-    
-
+     <!-- menu de buscar Calificacion -->
+    <template v-else-if="listado == 1">
+      <!-- Buscar Calificaciones -->
+      <h3>Busqueda de Calificaciones</h3>
+      <input type="text" v-model="buscarCalificacion" placeholder="Nombre Cliente" />
+      <button type="button" @click="listar(buscarCalificacion)">Buscar</button>
+      <br />
+      <a href="#" @click="nuevo()">Volver</a>
+      <br />
+      <br />
+      <table border="1">
+        <thead>
+          <th>Id</th>
+          <th>Gestion</th>
+          <th>Estudiante</th>
+          <th>Materia</th>
+          <th>Bimestre</th>
+          <th>Ser</th>
+          <th>Saber</th>
+          <th>Hacer</th>
+          <th>Decidir</th>
+          <th>Total</th>
+          <th>Opcion</th>
+        </thead>
+        <tbody>
+          <tr v-for="calificacion in arrayCalificacion" :key="calificacion.id">
+            <td v-text="calificacion.id"></td>
+            <td v-text="calificacion.Gestion"></td>
+            <td v-text="calificacion.estudiante + calificacion.estuapell">
+            <td v-text="calificacion.Materia"></td>
+            <td v-text="calificacion.Bimestre"></td>
+            <td v-text="calificacion.Ser"></td>
+            <td v-text="calificacion.Saber"></td>
+            <td v-text="calificacion.Hacer"></td>
+            <td v-text="calificacion.Decidir"></td>
+            <td v-text="calificacion.Ser+calificacion.Saber+calificacion.Hacer+calificacion.Decidir"></td>
+            <td>
+              <a href="#" @click="modificarCalificacion(calificacion.id)"
+                >Seleccionar</a
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </template>
     <!-- Inicio Modal frmBuscarEstudiante -->
     <div
       class="modal fade"
@@ -180,10 +206,10 @@
             <form action="" method="$POST">
               <input
                 type="text"
-                v-model="buscarEstudiante"
+                v-model="buscarAEstuCurso"
                 placeholder="Nombre Estudiante"
               />
-              <button type="button" @click="listarEstudiante(buscarEstudiante)">
+              <button type="button" @click="listarEstudiante(buscarAEstuCurso)">
                 Buscar por Nombre
               </button>
             </form>
@@ -192,16 +218,18 @@
                 <th>Id</th>
                 <th>Nombre</th>
                 <th>Apellido</th>
-                <th>Direccion</th>
-                <th>Telefono</th>
+                <th>Curso</th>
+                <th>Materia</th>
+                <th>Gestion</th>
               </thead>
               <tbody>
-                <tr v-for="estudiante in arrayEstudiante" :key="estudiante.id">
+                <tr v-for="estudiante in arrayAEstuCurso" :key="estudiante.id">
                   <td v-text="estudiante.id"></td>
                   <td v-text="estudiante.nombre"></td>
                   <td v-text="estudiante.apellido"></td>
-                  <td v-text="estudiante.direccion"></td>
-                  <td v-text="estudiante.telefono"></td>
+                  <td v-text="estudiante.curso"></td>
+                  <td v-text="estudiante.materia"></td>
+                  <td v-text="estudiante.gestion"></td>
                   <td>
                     <a
                       href="#"
@@ -221,120 +249,7 @@
       </div>
     </div>
     <!-- Fin Modal frmBuscarEstudiante -->
-
-    <!-- Inicio Modal frmBuscarCurso -->
-    <div
-      class="modal fade"
-      id="modalCurso"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="myModalLabel"
-      style="display: none"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-primary modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">Busqueda de Curso</h4>
-            <button type="button" data-dismiss="modal">x</button>
-          </div>
-          <div class="modal-body">
-            <!-- Aqui va su codigo -->
-            <center>
-              <h3>Busqueda de Cursos</h3>
-              <input type="text" v-model="buscarCurso" placeholder="Ej: 1ro" />
-              <button type="button" @click="listarCurso(buscarCurso)">
-                Buscar por Nombre</button
-              ><br />
-              <br />
-              <br />
-              <table border="1">
-                <thead>
-                  <th>ID</th>
-                  <th>Nombre</th>
-                  <th>Gestion</th>
-                  <th>Paralelo</th>
-                  <th>Opcion</th>
-                </thead>
-                <tbody>
-                  <tr v-for="curso in arrayCurso" :key="curso.id">
-                    <td v-text="curso.id"></td>
-                    <td v-text="curso.curso_nombre"></td>
-                    <td v-text="curso.gestion_nombre"></td>
-                    <td v-text="curso.paralelo_nombre"></td>
-
-                    <td>
-                      <a href="#" data-dismiss="modal" @click="seleccionarCurso(curso)"
-                        >Seleccionar</a
-                      >
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </center>
-          </div>
-          <div class="modal-footer">
-            <button type="button" data-dismiss="modal">Cerrar</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Fin Modal frmBuscarCurso -->
-    <!-- Inicio Modal frmBuscarMateria -->
-    <div
-      class="modal fade"
-      id="modalMateria"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="myModalLabel"
-      style="display: none"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-primary modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">Busqueda de Materia</h4>
-            <button type="button" data-dismiss="modal">x</button>
-          </div>
-          <div class="modal-body">
-            <!-- Aqui va su codigo -->
-            <center>
-              <h3>Busqueda de Materias</h3>
-              <input type="text" v-model="buscarMateria" placeholder="Ej: Matematicas" />
-              <button type="button" @click="listarMateria(buscarMateria)">
-                Buscar por Nombre</button
-              ><br />
-              <br />
-              <br />
-              <table border="1">
-                <thead>
-                  <th>ID</th>
-                  <th>Nombre</th>
-                  <th>Opcion</th>
-                </thead>
-                <tbody>
-                  <tr v-for="materia in arrayMateria" :key="materia.id">
-                    <td v-text="materia.id"></td>
-                    <td v-text="materia.nombre"></td>
-
-                    <td>
-                      <a href="#" data-dismiss="modal" @click="seleccionarMateria(materia)"
-                        >Seleccionar</a
-                      >
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </center>
-          </div>
-          <div class="modal-footer">
-            <button type="button" data-dismiss="modal">Cerrar</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Fin Modal frmBuscarMateria -->
-    <!-- Inicio Modal frmBuscarDetalle -->
+    <!-- Inicio Modal frmBuscarBimestre -->
     <div
       class="modal fade"
       id="modalDetalle"
@@ -347,376 +262,260 @@
       <div class="modal-dialog modal-primary modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title">Busqueda de Detalle</h4>
+            <h4 class="modal-title">Busqueda de Bimestre</h4>
             <button type="button" data-dismiss="modal">x</button>
           </div>
           <div class="modal-body">
-            <!-- Aqui va su codigo -->
-            <center>
-              <h3>Busqueda de Detalles</h3>
-              <input type="text" v-model="buscarDetalle" placeholder="Ej: Matematicas" />
-              <button type="button" @click="listarDetalle(buscarDetalle)">
-                Buscar por Nombre</button
-              ><br />
-              <br />
-              <br />
-              <table border="1">
-                <thead>
-                  <th>ID</th>
-                  <th>Ser</th>
-                  <th>Saber</th>
-                  <th>Hacer</th>
-                  <th>Decidir</th>
-                  <th>Bimestre</th>                  
-                  <th>Opcion</th>
-                </thead>
-                <tbody>
-                  <tr v-for="detalle in arrayDetalle" :key="detalle.id">
-                    <td v-text="detalle.id"></td>
-                    <td v-text="detalle.Ser"></td>
-                    <td v-text="detalle.Saber"></td>
-                    <td v-text="detalle.Hacer"></td>
-                    <td v-text="detalle.Decidir"></td>
-                    <td v-text="detalle.Bimestre"></td>
-
-                    <td>
-                      <a href="#" data-dismiss="modal" @click="seleccionarDetalle(detalle)"
-                        >Seleccionar</a
+            <div class="form-group row">
+              <div class="col-md-8">
+                <div class="input-group">
+                  <input
+                    type="text"
+                    v-model="buscarBimestre"
+                    placeholder="Nombre"
+                  />
+                  <button
+                    type="button"
+                    @click="listarBimestre(buscarBimestre)"
+                  >
+                    Buscar
+                  </button>
+                  <br />
+                  <br />
+                  <label for="" v-text="errorMsj"></label>
+                  <table border="1">
+                    <thead>
+                      <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr
+                        v-for="bimestre in arrayBimestre"
+                        :key="bimestre.id"
                       >
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </center>
+                        <td v-text="bimestre.id"></td>
+                        <td v-text="bimestre.bimestre"></td>
+                        <td>
+                          <a href="#" @click="seleccionarBimestre(bimestre)"
+                            >Seleccionar</a
+                          >
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="modal-footer">
-            <button type="button" data-dismiss="modal">Cerrar</button>
+            <button type="button" data-dismiss="modal">cerrar</button>
           </div>
         </div>
       </div>
     </div>
-    <!-- Fin Modal frmBuscarMateria -->
-
-
-
-   
+    <!-- Fin Modal frmBuscarBimestre -->
+    
+  
   </div>
 </template>
 
+ 
+    
+
+
+
+
 <script>
- export default {
-  data() {
-    return {
-      id: 0,
-      listado: 0,
-      buscarCurso: "",
-      fecha: "",
-      buscarNota: "",
-      buscar: "",
-      errorMsj: "",
-      buscarMateria: "",
-      materia: "",
-      idMateria: 0,
-      materiaNombre: "",
-      arrayMateria: [],
-      arrayInscripcion: [],
-      arrayNotas: [],
-      idEstudiante: "",
-      estudianteNombre: "",
-      estudianteApellido: "",
-      estudianteNombre2: "",
-      estudianteApellido2: "",
-      estudianteDireccion: "",
-      estudianteTelefono: "",
-      buscarEstudiante: "",
-      arrayEstudiante: [],
-      notaSer: 0,
-      notaSaber: 0,
-      notaHacer: 0,
-      notaDecidir: 0,
-      idCurso: "",
-      cursoCurso: "",
-      cursoNombre: "",
-      cursoParalelo: "",
-      cursoGestion: "",
-      arrayCurso: [],
-      relacion: "",
-      arrayDetalle: [],
-    };
+export default {
+  data(){
+  return{
+    listado: 0,
+    estudianteNombre: '',
+    estudianteApellido: '',
+    idCurso: 0,
+    cursoCurso: '',
+    cursoGestion: '',
+    idMateria:'',
+    materiaNombre:'',
+    observacion: '',
+    detalle: '',
+    notaSer:0,
+    notaSaber:0,
+    notaHacer:0,
+    notaDecidir:0,
+    buscarAEstuCurso:'',
+    arrayDetalle:[],
+    arrayCalificacion:[],
+    arrayAEstuCurso:[],
+    arrayCurso:[],
+    arrayBimestre:[],
+    arrayMateria:[],
+    idBimestre: 0,
+    buscarBimestre: '',
+    bimestreNombre:'',
+    idAEstuCurso:'',
+    errorMsj:''
+  }
   },
   methods: {
-    frmBuscarEstudiante() {
-      this.arrayEstudiante = [];
-      this.buscarEstudiante = "";
+    frmBuscarEstudiante(){
+      this.arrayAEstuCurso = [];
+      this.buscarAEstuCurso = '';
     },
-    frmBuscarCurso() {
-      this.arrayCurso = [];
-      this.buscarCurso = "";
+    frmBuscarBimestre(){
+      this.arrayBimestre=[];
+      this.buscarBimestre='';
+      this.errorMsj='';
     },
-    frmBuscarMateria() {
-      this.arrayMateria = [];
-      this.buscarMateria = "";
-      this.errorMsj = "";
+    seleccionarEstudiante(data = []){
+      this.idAEstuCurso = data["id"];
+      this.estudianteNombre = data["nombre"];
+      this.estudianteApellido = data["apellido"];
+      this.cursoCurso = data["curso"];
+      this.materiaNombre = data["materia"];
+      this.cursoGestion = data["gestion"];
     },
-    seleccionarCurso(data = []) {
-      this.idCurso = data["id"];
-      this.cursoNombre = data["curso_nombre"];
-      this.cursoGestion = data["gestion_nombre"];
-      this.cursoParalelo = data["paralelo_nombre"];
-      this.cursoCurso = data["curso_nombre"] + " " + data["paralelo_nombre"];
+    listarEstudiante(buscar) {
+      let me = this;
+      var url = "/calificacion/EstuCurso?buscar=" + buscar;
+      axios
+        .get(url)
+        .then(function (response) {
+          me.arrayAEstuCurso = response.data;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     },
-    seleccionarMateria(data = []) {
-      this.idMateria = data["id"];
-      this.materiaNombre = data["nombre"];
+    eliminarDetalle(index) {
+    this.arrayDetalle.splice(index, 1);
     },
-    seleccionarDetalle(data = []) {
+    listarBimestre(buscar){
+    let me = this;
+    var url='/bimestre?buscar='+buscar;
+    axios.get(url).then(function(response){
+      me.arrayBimestre= response.data;
+    })
+    .catch(function(error){
+      console.log(error);
+    });
+    },
+    seleccionarBimestre(data = []) {
       let me = this;
       if (me.encuentra(data["id"])) {
         this.errorMsj = "Ya se encuentra agregado...";
       } else {
         me.arrayDetalle.push({
-          id: data["id"],
-          notaSer: data["Ser"],
-          notaSaber: data["Saber"],
-          notaHacer: data["Hacer"],
-          notaDecidir: data["Decidir"],
-          bimestre: data["Bimestre"],
+          idBimestre: data["id"],
+          bimestre: data["bimestre"],
         });
       }
-    },
-    seleccionarEstudiante(data = []) {
-      this.idEstudiante = data["id"];
-      this.estudianteNombre = data["nombre"];
-      this.estudianteApellido = data["apellido"];
-      this.estudianteDireccion = data["direccion"];
-      this.estudianteTelefono = data["telefono"];
     },
     encuentra(id) {
       var sw = 0;
       for (var i = 0; i < this.arrayDetalle.length; i++) {
-        if (this.arrayDetalle[i].id == id) {
+        if (this.arrayDetalle[i].idBimestre == id) {
           sw = true;
         }
       }
       return sw;
     },
-    nuevo() {
-      this.id = 0;
-      this.listado = 0;
-      this.estudiante = "";
-      this.curso = "";
-      this.fecha = "";
-      this.buscar = "";
-      this.buscarApoderado = "";
-      this.apoderado = "";
-      this.idApoderado = 0;
-      this.apoderadoNombre = "";
-      this.apoderadoApellido = "";
-      this.apoderadoTelefono = "";
-      this.arrayApoderado = [];
-      this.arrayInscripcion = [];
-      this.arrayNotas = [];
-      this.buscarEstudiante = "",
-      this.idEstudiante = "",
-      this.estudianteNombre = "",
-      this.estudianteApellido = "",
-      this.estudianteDireccion = "",
-      this.estudianteTelefono = "";
-      this.arrayEstudiante = [];
-      this.relacion = "";
-      this.arrayDetalle = [];
-      this.idCurso = "";
-      this.cursoCurso = "";
-      this.cursoGestion = "";
-    },
-    guardarCalifcacion() {
+    guardarCalificacion() {
       let me = this;
-      if(this.validarDatos(this.idEstudiante, this.idCurso, this.idMateria, this.observacion)){
+      //if(this.validarDatos(this.idEstudiante, this.idCurso, this.fecha, this.arrayDetalle)){
       axios
         .post("/calificacion/registrar", {
-          fecha: this.fecha,
-          idCurso: this.idCurso, //Asignacion curso Gestion
-          idEstudiante: this.idEstudiante,
+          observacion: this.observacion,
+          codEstudianteCurso: this.idAEstuCurso, //Asignacion curso Estudiante
           data: this.arrayDetalle,
         })
         .then(function (response) {
-          me.respt = "Calificacion Registrada...!";
+          me.respt = "Incripcion Registrada...!";
         })
         .catch(function (error) {
           console.log(error);
         });
-        }
+        //}
 
         this.nuevo();
     },
-
-      modificar(){
-            let me = this;
-            axios.put('inscripcion/eliminarDetalles',{
-                id: this.id
-            }).then(function(error){
-                //
-            }).catch(function(error){
-                console.log(error);
-            }); 
-
-            axios.put('/inscripcion/modificar',{
-                fecha: this.fecha,
-                idCurso: this.idCurso, //Asignacion curso Gestion
-                idEstudiante: this.idEstudiante,
-                data: this.arrayDetalle,
-                id : this.id,
-
-            }).then(function (response) {
-                me.respt = 'inscripcion Modificada...!';
-            }).catch(function (error) {
-                console.log(error);
-            });        
-        },
-
-
-        eliminar(){
-            let me = this;
-
-            axios.put('inscripcion/eliminarDetalles',{
-                id: this.id
-            }).then(function(error){
-                //
-            }).catch(function(error){
-                console.log(error);
-            }); 
-
-
-            axios.put('inscripcion/eliminar',{
-              'id': this.id,
-            }).then(function(error){
-                me.listar('');
-            }).catch(function(error){
-                console.log(error);
-            });               
-        },
-
-
-    buscarInscripcion() {
-      this.listado = 1;
-      this.listar("");
+    nuevo(){
+    this.listado= 0;
+    this.estudianteNombre= '';
+    this.estudianteApellido= '';
+    this.idCurso= 0;
+    this.cursoCurso= '';
+    this.cursoGestion= '';
+    this.idMateria='';
+    this.materiaNombre='';
+    this.observacion= '';
+    this.detalle= '';
+    this.notaSer=0;
+    this.notaSaber=0;
+    this.notaHacer=0;
+    this.notaDecidir=0;
+    this.buscarAEstuCurso='';
+    this.arrayDetalle=[];
+    this.arrayCalificacion=[];
+    this.arrayAEstuCurso=[];
+    this.arrayCurso=[];
+    this.arrayBimestre=[];
+    this.arrayMateria=[];
+    this.idBimestre= 0;
+    this.buscarBimestre= '';
+    this.bimestreNombre='';
+    this.idAEstuCurso='';
+    this.errorMsj='';
+    console.log(this.arrayDetalle);
+    console.log(this.arrayCalificacion);
     },
     listar(buscar) {
       let me = this;
-      this.arrayInscripcion = [];
+      this.arrayCalificacion = [];
 
-      var url = "/inscripcion?buscar=" + buscar;
+      var url = "/calificacion/buscarDet?buscar=" + buscar;
       axios
         .get(url)
         .then(function (response) {
-          me.arrayInscripcion = response.data;
+          me.arrayCalificacion = response.data;
         })
         .catch(function (error) {
           console.log(error);
         });
     },
-    listarNota(buscarNota, apellido) {
-      let me = this;
-      var url =
-        "/frmbuscarnotas?buscar=" + buscarNota + "&apellido=" + apellido;
-      axios
-        .get(url)
-        .then(function (response) {
-          me.arrayNotas = response.data;
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+    buscarCalificacion(){
+      this.listado=1;
+      this.listar('');
     },
-    listarEstudiante(buscar) {
-      let me = this;
-      var url = "/estudiante?buscar=" + buscar;
-      axios
-        .get(url)
-        .then(function (response) {
-          me.arrayEstudiante = response.data;
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    },
-    listarMateria(buscar) {
-      let me = this;
-      var url = "/materia?buscar=" + buscar;
-      axios
-        .get(url)
-        .then(function (response) {
-          me.arrayMateria = response.data;
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    },
-
-    listarCurso(buscar) {
-      let me = this;
-      var url = "/frmbuscarcurso?buscar=" + buscar;
-      axios
-        .get(url)
-        .then(function (response) {
-          me.arrayCurso = response.data;
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    },
-    listarInscripcion(buscar) {
-      let me = this;
-      var url = "/inscripcion?buscar=" + buscar;
-      axios
-        .get(url)
-        .then(function (response) {
-          me.arrayInscripcion = response.data;
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    },
-    listarDetalle(buscar) {
-      let me = this;
-      var url = '/calificacion/buscarDet?buscar=' + buscar;
-      axios
-        .get(url)
-        .then(function (response) {
-          me.arrayDetalle = response.data;
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    },
-    modificarDetalle(id) {
+    modificarCalificacion(id) {
       let me = this;
       me.listado = 0;
       this.respt = "";
-      let arrayInscripcionT;
-      var url = "/inscripcion/obtenerCabecera?id=" + id;
+      let arrayCalificacionT;
+      var url = "/calificacion/cabecera?id=" + id;
       axios
         .get(url)
         .then(function (response) {
-          arrayInscripcionT = response.data.inscripcion;
-          me.id = arrayInscripcionT[0].id;
-          console.log(arrayInscripcionT);
-          me.idEstudiante = arrayInscripcionT[0].idEstudiante;
-          me.estudianteNombre = arrayInscripcionT[0].estudianteNombre;
-          me.estudianteApellido = arrayInscripcionT[0].estudianteApellido;
-          me.idCurso = arrayInscripcionT[0].idCurso;
-          me.cursoCurso = arrayInscripcionT[0].cursoNombre + arrayInscripcionT[0].cursoParalelo;
-          me.cursoGestion = arrayInscripcionT[0].cursoGestion;
-          me.fecha = arrayInscripcionT[0].fecha;
+          arrayCalificacionT = response.data.inscripcion;
+          me.id = arrayCalificacionT[0].id;
+          console.log(arrayCalificacionT);
+          me.idEstudiante = arrayCalificacionT[0].idAEstudianteCurso;
+          me.estudianteNombre = arrayCalificacionT[0].Estudiante;
+          me.estudianteApellido = arrayCalificacionT[0].estuapell;
+          me.cursoCurso = arrayCalificacionT[0].curso;
+          me.cursoGestion = arrayCalificacionT[0].Gestion;
+          me.materiaNombre = arrayCalificacionT[0].Materia;
+          me.observacion = arrayCalificacionT[0].observacion;
           console.log(me);
-          console.log(arrayInscripcionT.idEstudiantes);
-          console.log(typeof arrayInscripcionT);
+          console.log(typeof arrayCalificacionT);
         })
         .catch(function (error) {
           console.log(error);
         });
 
-      var url1 = "/inscripcion/obtenerDetalles?id=" + id;
+      var url1 = "/calificacion/detalle?id=" + id;
       axios
         .get(url1)
         .then(function (response) {
@@ -727,30 +526,11 @@
         });
     },
 
-    eliminarDetalle(index) {
-    this.arrayDetalle.splice(index, 1);
-  },
 
-  validarDatos(estudiante, curso, materia, observacion) {
-    if(estudiante == '' || estudiante == undefined || estudiante == null) {
-      alert("debes llenar el campo de estudiante");
-      return false;
-    } else if(curso == '' || curso == undefined || curso == null) {
-      alert("debes llenar el campo de curso");
-      return false;
-    } else if(materia == '' || materia == undefined || materia == null) {
-      alert("debes llenar el campo de materia");
-      return false;
-    } else if(observacion == '' || observacion == undefined || observacion == null){
-      alert("debes llenar el campo de observacion");
-      return false;
-    }
-    return true;
   },
-  },
-  mounted() {
-    console.log("Component mounted.");
-    //this.listarApoderado(this.buscar);
-  },
-};
+  mounted(){
+
+
+  }
+}
 </script>
