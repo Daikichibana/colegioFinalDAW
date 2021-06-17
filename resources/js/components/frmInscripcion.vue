@@ -723,7 +723,7 @@ export default {
           arrayInscripcionT = response.data.inscripcion;
           me.id = arrayInscripcionT[0].id;
           console.log(arrayInscripcionT);
-          me.idEstudiante = arrayInscripcionT[0].idEstudiante;
+          me.idEstudiante = arrayInscripcionT[0].idAEstudianteCurso;
           me.estudianteNombre = arrayInscripcionT[0].estudianteNombre;
           me.estudianteApellido = arrayInscripcionT[0].estudianteApellido;
           me.idCurso = arrayInscripcionT[0].idCurso;
