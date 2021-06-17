@@ -55,9 +55,9 @@
         <tbody>
           <tr v-for="asignacion in arrayAsignacion" :key="asignacion.id">
             <td v-text="asignacion.id"></td>
-            <td v-text="asignacion.codGestion"></td>
-            <td v-text="asignacion.codCurso"></td>
-            <td v-text="asignacion.codParalelo"></td>
+            <td v-text="asignacion.Gestion"></td>
+            <td v-text="asignacion.Curso"></td>
+            <td v-text="asignacion.Paralelo"></td>
             <td><a href="#" @click="llenar(asignacion)">Seleccionar</a></td>
           </tr>
         </tbody>

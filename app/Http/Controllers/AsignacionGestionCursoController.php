@@ -11,13 +11,34 @@ class AsignacionGestionCursoController extends Controller
     public function index(Request $request){
         $buscar= $request->buscar;
         if($buscar==0){
-            $asignacion=AsignacionCursoGestion::all();
+            $s=DB::table('asignaciongestioncurso')
+            ->join('gestion', 'codGestion', '=', 'gestion.id')
+            ->join('curso', 'codCurso', '=', 'curso.id')
+            ->join('paralelo', 'codParalelo', '=', 'paralelo.id')
+            ->select(
+                'asignaciongestioncurso.id',
+                'curso.nombre as Curso', 
+                'gestion.año as Gesttion',
+                'paralelo.nombre as Paralelo'
+                )
+            ->orderBy('id', 'asc')->get();
         }
         else{
-            $asignacion=AsignacionCursoGestion::where('id','=',$buscar)->get();
+            $s=DB::table('asignaciongestioncurso')
+            ->join('gestion', 'codGestion', '=', 'gestion.id')
+            ->join('curso', 'codCurso', '=', 'curso.id')
+            ->join('paralelo', 'codParalelo', '=', 'paralelo.id')
+            ->select('asignaciongestioncurso.id',  
+                        'curso.nombre as Curso', 
+                        'gestion.año as Gestion',
+                        'paralelo.nombre as Paralelo'
+                    )
+            ->where('asignaciongestioncurso.id','=',$buscar)
+            ->orderBy('id', 'asc')
+            ->get();
         }
         
-        return $asignacion;
+        return $s;
     }
 
     public function store(Request $request){
