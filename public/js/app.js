@@ -3324,98 +3324,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 //
 //
 //
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  data: function data() {
-    return {
-      id: 0,
-      año: '',
-      buscar: '',
-      arrayBusqueda: []
-    };
-  },
-  methods: {
-    listar: function listar(buscar) {
-      var me = this;
-      var url = '/consultarCali?buscar=' + buscar + '&buscar2=' + me.id;
-      axios.get(url).then(function (response) {
-        me.arrayBusqueda = response.data;
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    listarEstudiante: function listarEstudiante(buscar) {
-      var me = this;
-      var url = '/buscarIdEstudiante?buscar=' + buscar;
-      axios.get(url).then(function (response) {
-        me.id = response.data[0].id;
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    }
-  },
-  mounted: function mounted() {
-    var usuarioLogeadoId = document.head.querySelector('meta[name="user"]');
-    var usuarioLogeadoRol = document.head.querySelector('meta[name="role"]');
-
-    switch (usuarioLogeadoRol.content) {
-      case "Estudiante":
-        this.listarEstudiante(usuarioLogeadoId.content);
-        break;
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/frmCursos.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/frmCursos.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -3770,7 +3678,7 @@ __webpack_require__.r(__webpack_exports__);
       var sw = 0;
 
       for (var i = 0; i < this.arrayDetalle.length; i++) {
-        if (this.arrayDetalle[i].idApoderado == id) {
+        if (this.arrayDetalle[i].id == id) {
           sw = true;
         }
       }
@@ -3804,8 +3712,8 @@ __webpack_require__.r(__webpack_exports__);
     guardarCalifcacion: function guardarCalifcacion() {
       var me = this;
 
-      if (this.validarDatos(this.idEstudiante, this.idCurso, this.fecha, this.arrayDetalle)) {
-        axios.post("/inscripcion/registrar", {
+      if (this.validarDatos(this.idEstudiante, this.idCurso, this.idMateria, this.observacion)) {
+        axios.post("/calificacion/registrar", {
           fecha: this.fecha,
           idCurso: this.idCurso,
           //Asignacion curso Gestion
@@ -3958,18 +3866,18 @@ __webpack_require__.r(__webpack_exports__);
     eliminarDetalle: function eliminarDetalle(index) {
       this.arrayDetalle.splice(index, 1);
     },
-    validarDatos: function validarDatos(estudiante, curso, fecha, detalle) {
+    validarDatos: function validarDatos(estudiante, curso, materia, observacion) {
       if (estudiante == '' || estudiante == undefined || estudiante == null) {
         alert("debes llenar el campo de estudiante");
         return false;
       } else if (curso == '' || curso == undefined || curso == null) {
         alert("debes llenar el campo de curso");
         return false;
-      } else if (fecha == '' || fecha == undefined || fecha == null) {
-        alert("debes llenar el campo de fecha");
+      } else if (materia == '' || materia == undefined || materia == null) {
+        alert("debes llenar el campo de materia");
         return false;
-      } else if (detalle == '' || detalle == undefined || detalle == null) {
-        alert("debes llenar el campo de apoderados");
+      } else if (observacion == '' || observacion == undefined || observacion == null) {
+        alert("debes llenar el campo de observacion");
         return false;
       }
 
