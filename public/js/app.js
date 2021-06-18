@@ -3175,8 +3175,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 //
 //
 //
@@ -3312,97 +3310,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-<<<<<<< HEAD
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-=======
->>>>>>> 9d07f9a171f9cd9c1e0b67e1cf90d65daead507f
 //
 //
 //
@@ -3673,86 +3580,22 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       var sw = 0;
 
       for (var i = 0; i < this.arrayDetalle.length; i++) {
-<<<<<<< HEAD
-        if (this.arrayDetalle[i].id == id) {
-=======
         if (this.arrayDetalle[i].idBimestre == id) {
->>>>>>> 9d07f9a171f9cd9c1e0b67e1cf90d65daead507f
           sw = true;
         }
       }
 
       return sw;
     },
-<<<<<<< HEAD
-    nuevo: function nuevo() {
-      this.id = 0;
-      this.listado = 0;
-      this.estudiante = "";
-      this.curso = "";
-      this.fecha = "";
-      this.buscar = "";
-      this.buscarApoderado = "";
-      this.apoderado = "";
-      this.idApoderado = 0;
-      this.apoderadoNombre = "";
-      this.apoderadoApellido = "";
-      this.apoderadoTelefono = "";
-      this.arrayApoderado = [];
-      this.arrayInscripcion = [];
-      this.arrayNotas = [];
-      this.buscarEstudiante = "", this.idEstudiante = "", this.estudianteNombre = "", this.estudianteApellido = "", this.estudianteDireccion = "", this.estudianteTelefono = "";
-      this.arrayEstudiante = [];
-      this.relacion = "";
-      this.arrayDetalle = [];
-      this.idCurso = "";
-      this.cursoCurso = "";
-      this.cursoGestion = "";
-    },
-    guardarCalifcacion: function guardarCalifcacion() {
-      var me = this;
-
-      if (this.validarDatos(this.idEstudiante, this.idCurso, this.idMateria, this.observacion)) {
-        axios.post("/calificacion/registrar", {
-          fecha: this.fecha,
-          idCurso: this.idCurso,
-          //Asignacion curso Gestion
-          idEstudiante: this.idEstudiante,
-          data: this.arrayDetalle
-        }).then(function (response) {
-          me.respt = "Calificacion Registrada...!";
-        })["catch"](function (error) {
-          console.log(error);
-        });
-      }
-
-      this.nuevo();
-    },
-    modificar: function modificar() {
-      var me = this;
-      axios.put('inscripcion/eliminarDetalles', {
-        id: this.id
-      }).then(function (error) {//
-      })["catch"](function (error) {
-        console.log(error);
-      });
-      axios.put('/inscripcion/modificar', {
-        fecha: this.fecha,
-        idCurso: this.idCurso,
-        //Asignacion curso Gestion
-        idEstudiante: this.idEstudiante,
-        data: this.arrayDetalle,
-        id: this.id
-=======
     guardarCalificacion: function guardarCalificacion() {
       var me = this; //if(this.validarDatos(this.idEstudiante, this.idCurso, this.fecha, this.arrayDetalle)){
 
+      console.log(this.idAEstuCurso);
       axios.post("/calificacion/registrar", {
         observacion: this.observacion,
         codEstudianteCurso: this.idAEstuCurso,
         //Asignacion curso Estudiante
         data: this.arrayDetalle
->>>>>>> 9d07f9a171f9cd9c1e0b67e1cf90d65daead507f
       }).then(function (response) {
         me.respt = "Incripcion Registrada...!";
       })["catch"](function (error) {
@@ -3794,9 +3637,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     listar: function listar(buscar) {
       var me = this;
       this.arrayCalificacion = [];
-      var url = "/calificacion/buscarDet?buscar=" + buscar;
+      var url = "/calificacion?buscar=" + buscar;
       axios.get(url).then(function (response) {
         me.arrayCalificacion = response.data;
+        console.log(response.data);
       })["catch"](function (error) {
         console.log(error);
       });
@@ -3812,9 +3656,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       var arrayCalificacionT;
       var url = "/calificacion/cabecera?id=" + id;
       axios.get(url).then(function (response) {
-        arrayCalificacionT = response.data.inscripcion;
+        arrayCalificacionT = response.data;
         me.id = arrayCalificacionT[0].id;
-        console.log(arrayCalificacionT);
+        me.idAEstuCurso = arrayCalificacionT[0].idAEstudianteCurso;
         me.idEstudiante = arrayCalificacionT[0].idAEstudianteCurso;
         me.estudianteNombre = arrayCalificacionT[0].Estudiante;
         me.estudianteApellido = arrayCalificacionT[0].estuapell;
@@ -3822,40 +3666,53 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         me.cursoGestion = arrayCalificacionT[0].Gestion;
         me.materiaNombre = arrayCalificacionT[0].Materia;
         me.observacion = arrayCalificacionT[0].observacion;
-        console.log(me);
-        console.log(_typeof(arrayCalificacionT));
+        console.log(arrayCalificacionT[0]);
       })["catch"](function (error) {
         console.log(error);
       });
       var url1 = "/calificacion/detalle?id=" + id;
       axios.get(url1).then(function (response) {
-        me.arrayDetalle = response.data.detalle;
+        me.arrayDetalle = response.data;
       })["catch"](function (error) {
         console.log(error);
       });
-<<<<<<< HEAD
     },
-    eliminarDetalle: function eliminarDetalle(index) {
-      this.arrayDetalle.splice(index, 1);
+    modificar: function modificar() {
+      var me = this;
+      axios.put('calificacion/eliminarDetalles', {
+        id: this.id
+      }).then(function (error) {//
+      })["catch"](function (error) {
+        console.log(error);
+      });
+      axios.put('/calificacion/modificar', {
+        observacion: this.observacion,
+        codEstudianteCurso: this.idAEstuCurso,
+        //Asignacion curso Estudiante
+        data: this.arrayDetalle,
+        id: this.id
+      }).then(function (response) {
+        me.respt = 'calificacion Modificada...!';
+      })["catch"](function (error) {
+        console.log(error);
+      });
     },
-    validarDatos: function validarDatos(estudiante, curso, materia, observacion) {
-      if (estudiante == '' || estudiante == undefined || estudiante == null) {
-        alert("debes llenar el campo de estudiante");
-        return false;
-      } else if (curso == '' || curso == undefined || curso == null) {
-        alert("debes llenar el campo de curso");
-        return false;
-      } else if (materia == '' || materia == undefined || materia == null) {
-        alert("debes llenar el campo de materia");
-        return false;
-      } else if (observacion == '' || observacion == undefined || observacion == null) {
-        alert("debes llenar el campo de observacion");
-        return false;
-      }
-
-      return true;
-=======
->>>>>>> 9d07f9a171f9cd9c1e0b67e1cf90d65daead507f
+    eliminar: function eliminar() {
+      var me = this;
+      axios.put('calificacion/eliminarDetalles', {
+        id: this.id
+      }).then(function (error) {//
+      })["catch"](function (error) {
+        console.log(error);
+      });
+      axios.put('calificacion/eliminar', {
+        'id': this.id
+      }).then(function (error) {
+        me.listar('');
+      })["catch"](function (error) {
+        console.log(error);
+      });
+      this.nuevo();
     }
   },
   mounted: function mounted() {}
@@ -4703,16 +4560,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -5126,6 +4973,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     guardarCalificacion: function guardarCalificacion() {
       var me = this; //if(this.validarDatos(this.idEstudiante, this.idCurso, this.fecha, this.arrayDetalle)){
 
+      console.log(this.idAEstuCurso);
       axios.post("/calificacion/registrar", {
         observacion: this.observacion,
         codEstudianteCurso: this.idAEstuCurso,
@@ -5172,9 +5020,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     listar: function listar(buscar) {
       var me = this;
       this.arrayCalificacion = [];
-      var url = "/calificacion/buscarDet?buscar=" + buscar;
+      var url = "/calificacion?buscar=" + buscar;
       axios.get(url).then(function (response) {
         me.arrayCalificacion = response.data;
+        console.log(response.data);
       })["catch"](function (error) {
         console.log(error);
       });
@@ -5190,9 +5039,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       var arrayCalificacionT;
       var url = "/calificacion/cabecera?id=" + id;
       axios.get(url).then(function (response) {
-        arrayCalificacionT = response.data.inscripcion;
+        arrayCalificacionT = response.data;
         me.id = arrayCalificacionT[0].id;
-        console.log(arrayCalificacionT);
+        me.idAEstuCurso = arrayCalificacionT[0].idAEstudianteCurso;
         me.idEstudiante = arrayCalificacionT[0].idAEstudianteCurso;
         me.estudianteNombre = arrayCalificacionT[0].Estudiante;
         me.estudianteApellido = arrayCalificacionT[0].estuapell;
@@ -5200,17 +5049,53 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         me.cursoGestion = arrayCalificacionT[0].Gestion;
         me.materiaNombre = arrayCalificacionT[0].Materia;
         me.observacion = arrayCalificacionT[0].observacion;
-        console.log(me);
-        console.log(_typeof(arrayCalificacionT));
+        console.log(arrayCalificacionT[0]);
       })["catch"](function (error) {
         console.log(error);
       });
       var url1 = "/calificacion/detalle?id=" + id;
       axios.get(url1).then(function (response) {
-        me.arrayDetalle = response.data.detalle;
+        me.arrayDetalle = response.data;
       })["catch"](function (error) {
         console.log(error);
       });
+    },
+    modificar: function modificar() {
+      var me = this;
+      axios.put('calificacion/eliminarDetalles', {
+        id: this.id
+      }).then(function (error) {//
+      })["catch"](function (error) {
+        console.log(error);
+      });
+      axios.put('/calificacion/modificar', {
+        observacion: this.observacion,
+        codEstudianteCurso: this.idAEstuCurso,
+        //Asignacion curso Estudiante
+        data: this.arrayDetalle,
+        id: this.id
+      }).then(function (response) {
+        me.respt = 'calificacion Modificada...!';
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    eliminar: function eliminar() {
+      var me = this;
+      axios.put('calificacion/eliminarDetalles', {
+        id: this.id
+      }).then(function (error) {//
+      })["catch"](function (error) {
+        console.log(error);
+      });
+      axios.put('calificacion/eliminar', {
+        'id': this.id
+      }).then(function (error) {
+        me.listar('');
+      })["catch"](function (error) {
+        console.log(error);
+      });
+      this.nuevo();
     }
   },
   mounted: function mounted() {}
@@ -44942,15 +44827,13 @@ var render = function() {
               _c("td", { domProps: { textContent: _vm._s(asignacion.id) } }),
               _vm._v(" "),
               _c("td", {
-                domProps: { textContent: _vm._s(asignacion.codGestion) }
+                domProps: { textContent: _vm._s(asignacion.Gestion) }
               }),
               _vm._v(" "),
-              _c("td", {
-                domProps: { textContent: _vm._s(asignacion.codCurso) }
-              }),
+              _c("td", { domProps: { textContent: _vm._s(asignacion.Curso) } }),
               _vm._v(" "),
               _c("td", {
-                domProps: { textContent: _vm._s(asignacion.codParalelo) }
+                domProps: { textContent: _vm._s(asignacion.Paralelo) }
               }),
               _vm._v(" "),
               _c("td", [
@@ -46194,12 +46077,12 @@ var render = function() {
                                   {
                                     name: "model",
                                     rawName: "v-model",
-                                    value: detalle.notaSer,
-                                    expression: "detalle.notaSer"
+                                    value: detalle.Ser,
+                                    expression: "detalle.Ser"
                                   }
                                 ],
                                 attrs: { type: "text", placeholder: "Ser..." },
-                                domProps: { value: detalle.notaSer },
+                                domProps: { value: detalle.Ser },
                                 on: {
                                   input: function($event) {
                                     if ($event.target.composing) {
@@ -46207,7 +46090,7 @@ var render = function() {
                                     }
                                     _vm.$set(
                                       detalle,
-                                      "notaSer",
+                                      "Ser",
                                       $event.target.value
                                     )
                                   }
@@ -46221,15 +46104,15 @@ var render = function() {
                                   {
                                     name: "model",
                                     rawName: "v-model",
-                                    value: detalle.notaSaber,
-                                    expression: "detalle.notaSaber"
+                                    value: detalle.Saber,
+                                    expression: "detalle.Saber"
                                   }
                                 ],
                                 attrs: {
                                   type: "text",
                                   placeholder: "Saber..."
                                 },
-                                domProps: { value: detalle.notaSaber },
+                                domProps: { value: detalle.Saber },
                                 on: {
                                   input: function($event) {
                                     if ($event.target.composing) {
@@ -46237,7 +46120,7 @@ var render = function() {
                                     }
                                     _vm.$set(
                                       detalle,
-                                      "notaSaber",
+                                      "Saber",
                                       $event.target.value
                                     )
                                   }
@@ -46251,15 +46134,15 @@ var render = function() {
                                   {
                                     name: "model",
                                     rawName: "v-model",
-                                    value: detalle.notaHacer,
-                                    expression: "detalle.notaHacer"
+                                    value: detalle.Hacer,
+                                    expression: "detalle.Hacer"
                                   }
                                 ],
                                 attrs: {
                                   type: "text",
                                   placeholder: "Hacer..."
                                 },
-                                domProps: { value: detalle.notaHacer },
+                                domProps: { value: detalle.Hacer },
                                 on: {
                                   input: function($event) {
                                     if ($event.target.composing) {
@@ -46267,7 +46150,7 @@ var render = function() {
                                     }
                                     _vm.$set(
                                       detalle,
-                                      "notaHacer",
+                                      "Hacer",
                                       $event.target.value
                                     )
                                   }
@@ -46281,15 +46164,15 @@ var render = function() {
                                   {
                                     name: "model",
                                     rawName: "v-model",
-                                    value: detalle.notaDecidir,
-                                    expression: "detalle.notaDecidir"
+                                    value: detalle.Decidir,
+                                    expression: "detalle.Decidir"
                                   }
                                 ],
                                 attrs: {
                                   type: "text",
                                   placeholder: "Decidir..."
                                 },
-                                domProps: { value: detalle.notaDecidir },
+                                domProps: { value: detalle.Decidir },
                                 on: {
                                   input: function($event) {
                                     if ($event.target.composing) {
@@ -46297,7 +46180,7 @@ var render = function() {
                                     }
                                     _vm.$set(
                                       detalle,
-                                      "notaDecidir",
+                                      "Decidir",
                                       $event.target.value
                                     )
                                   }
@@ -46463,45 +46346,10 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _c("td", {
-                      domProps: {
-                        textContent: _vm._s(
-                          calificacion.estudiante + calificacion.estuapell
-                        )
-                      }
+                      domProps: { textContent: _vm._s(calificacion.Estudiante) }
                     }),
                     _c("td", {
                       domProps: { textContent: _vm._s(calificacion.Materia) }
-                    }),
-                    _vm._v(" "),
-                    _c("td", {
-                      domProps: { textContent: _vm._s(calificacion.Bimestre) }
-                    }),
-                    _vm._v(" "),
-                    _c("td", {
-                      domProps: { textContent: _vm._s(calificacion.Ser) }
-                    }),
-                    _vm._v(" "),
-                    _c("td", {
-                      domProps: { textContent: _vm._s(calificacion.Saber) }
-                    }),
-                    _vm._v(" "),
-                    _c("td", {
-                      domProps: { textContent: _vm._s(calificacion.Hacer) }
-                    }),
-                    _vm._v(" "),
-                    _c("td", {
-                      domProps: { textContent: _vm._s(calificacion.Decidir) }
-                    }),
-                    _vm._v(" "),
-                    _c("td", {
-                      domProps: {
-                        textContent: _vm._s(
-                          calificacion.Ser +
-                            calificacion.Saber +
-                            calificacion.Hacer +
-                            calificacion.Decidir
-                        )
-                      }
                     }),
                     _vm._v(" "),
                     _c("td", [
@@ -46767,18 +46615,6 @@ var staticRenderFns = [
       _c("th", [_vm._v("Estudiante")]),
       _vm._v(" "),
       _c("th", [_vm._v("Materia")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Bimestre")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Ser")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Saber")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Hacer")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Decidir")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Total")]),
       _vm._v(" "),
       _c("th", [_vm._v("Opcion")])
     ])
@@ -48673,12 +48509,12 @@ var render = function() {
                                   {
                                     name: "model",
                                     rawName: "v-model",
-                                    value: detalle.notaSer,
-                                    expression: "detalle.notaSer"
+                                    value: detalle.Ser,
+                                    expression: "detalle.Ser"
                                   }
                                 ],
                                 attrs: { type: "text", placeholder: "Ser..." },
-                                domProps: { value: detalle.notaSer },
+                                domProps: { value: detalle.Ser },
                                 on: {
                                   input: function($event) {
                                     if ($event.target.composing) {
@@ -48686,7 +48522,7 @@ var render = function() {
                                     }
                                     _vm.$set(
                                       detalle,
-                                      "notaSer",
+                                      "Ser",
                                       $event.target.value
                                     )
                                   }
@@ -48700,15 +48536,15 @@ var render = function() {
                                   {
                                     name: "model",
                                     rawName: "v-model",
-                                    value: detalle.notaSaber,
-                                    expression: "detalle.notaSaber"
+                                    value: detalle.Saber,
+                                    expression: "detalle.Saber"
                                   }
                                 ],
                                 attrs: {
                                   type: "text",
                                   placeholder: "Saber..."
                                 },
-                                domProps: { value: detalle.notaSaber },
+                                domProps: { value: detalle.Saber },
                                 on: {
                                   input: function($event) {
                                     if ($event.target.composing) {
@@ -48716,7 +48552,7 @@ var render = function() {
                                     }
                                     _vm.$set(
                                       detalle,
-                                      "notaSaber",
+                                      "Saber",
                                       $event.target.value
                                     )
                                   }
@@ -48730,15 +48566,15 @@ var render = function() {
                                   {
                                     name: "model",
                                     rawName: "v-model",
-                                    value: detalle.notaHacer,
-                                    expression: "detalle.notaHacer"
+                                    value: detalle.Hacer,
+                                    expression: "detalle.Hacer"
                                   }
                                 ],
                                 attrs: {
                                   type: "text",
                                   placeholder: "Hacer..."
                                 },
-                                domProps: { value: detalle.notaHacer },
+                                domProps: { value: detalle.Hacer },
                                 on: {
                                   input: function($event) {
                                     if ($event.target.composing) {
@@ -48746,7 +48582,7 @@ var render = function() {
                                     }
                                     _vm.$set(
                                       detalle,
-                                      "notaHacer",
+                                      "Hacer",
                                       $event.target.value
                                     )
                                   }
@@ -48760,15 +48596,15 @@ var render = function() {
                                   {
                                     name: "model",
                                     rawName: "v-model",
-                                    value: detalle.notaDecidir,
-                                    expression: "detalle.notaDecidir"
+                                    value: detalle.Decidir,
+                                    expression: "detalle.Decidir"
                                   }
                                 ],
                                 attrs: {
                                   type: "text",
                                   placeholder: "Decidir..."
                                 },
-                                domProps: { value: detalle.notaDecidir },
+                                domProps: { value: detalle.Decidir },
                                 on: {
                                   input: function($event) {
                                     if ($event.target.composing) {
@@ -48776,7 +48612,7 @@ var render = function() {
                                     }
                                     _vm.$set(
                                       detalle,
-                                      "notaDecidir",
+                                      "Decidir",
                                       $event.target.value
                                     )
                                   }
@@ -48916,46 +48752,26 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _c("td", {
-                      domProps: {
-                        textContent: _vm._s(
-                          calificacion.estudiante + calificacion.estuapell
-                        )
-                      }
+                      domProps: { textContent: _vm._s(calificacion.Estudiante) }
                     }),
                     _c("td", {
                       domProps: { textContent: _vm._s(calificacion.Materia) }
                     }),
                     _vm._v(" "),
-                    _c("td", {
-                      domProps: { textContent: _vm._s(calificacion.Bimestre) }
-                    }),
-                    _vm._v(" "),
-                    _c("td", {
-                      domProps: { textContent: _vm._s(calificacion.Ser) }
-                    }),
-                    _vm._v(" "),
-                    _c("td", {
-                      domProps: { textContent: _vm._s(calificacion.Saber) }
-                    }),
-                    _vm._v(" "),
-                    _c("td", {
-                      domProps: { textContent: _vm._s(calificacion.Hacer) }
-                    }),
-                    _vm._v(" "),
-                    _c("td", {
-                      domProps: { textContent: _vm._s(calificacion.Decidir) }
-                    }),
-                    _vm._v(" "),
-                    _c("td", {
-                      domProps: {
-                        textContent: _vm._s(
-                          calificacion.Ser +
-                            calificacion.Saber +
-                            calificacion.Hacer +
-                            calificacion.Decidir
-                        )
-                      }
-                    })
+                    _c("td", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.modificarCalificacion(calificacion.id)
+                            }
+                          }
+                        },
+                        [_vm._v("Seleccionar")]
+                      )
+                    ])
                   ])
                 }),
                 0
@@ -49205,18 +49021,6 @@ var staticRenderFns = [
       _c("th", [_vm._v("Estudiante")]),
       _vm._v(" "),
       _c("th", [_vm._v("Materia")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Bimestre")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Ser")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Saber")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Hacer")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Decidir")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Total")]),
       _vm._v(" "),
       _c("th", [_vm._v("Opcion")])
     ])
@@ -49791,9 +49595,7 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _c("td", {
-                      domProps: {
-                        textContent: _vm._s(inscripcion.fechaInscripcion)
-                      }
+                      domProps: { textContent: _vm._s(inscripcion.fecha) }
                     }),
                     _vm._v(" "),
                     _c("td", {

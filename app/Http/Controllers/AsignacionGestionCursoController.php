@@ -18,7 +18,7 @@ class AsignacionGestionCursoController extends Controller
             ->select(
                 'asignaciongestioncurso.id',
                 'curso.nombre as Curso', 
-                'gestion.año as Gesttion',
+                'gestion.año as Gestion',
                 'paralelo.nombre as Paralelo'
                 )
             ->orderBy('id', 'asc')->get();

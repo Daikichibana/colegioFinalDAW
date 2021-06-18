@@ -85,6 +85,9 @@ Route::get('/calificacion/cabecera',[App\Http\Controllers\CalificacionController
 Route::get('/calificacion/detalle',[App\Http\Controllers\CalificacionController::class, 'obtenerDetalles']);
 
 Route::post('/calificacion/registrar',[App\Http\Controllers\CalificacionController::class, 'store']);
+Route::put('/calificacion/modificar',[App\Http\Controllers\CalificacionController::class, 'update']);
+Route::put('/calificacion/eliminar',[App\Http\Controllers\CalificacionController::class, 'delete']);
+Route::put('/calificacion/eliminarDetalles',[App\Http\Controllers\CalificacionController::class, 'deleteDetalle']);
 
 Route::get('/listarNotas',[App\Http\Controllers\CalificacionController::class, 'listar']);
 

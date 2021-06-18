@@ -143,7 +143,7 @@
         <tbody>
           <tr v-for="inscripcion in arrayInscripcion" :key="inscripcion.id">
             <td v-text="inscripcion.id"></td>
-            <td v-text="inscripcion.fechaInscripcion"></td>
+            <td v-text="inscripcion.fecha"></td>
             <td v-text="inscripcion.cursoNombre"></td>
             <td v-text="inscripcion.cursoGestion"></td>
             <td

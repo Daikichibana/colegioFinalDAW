@@ -90,32 +90,32 @@
                 <input
                   type="text"
                   placeholder="Ser..."
-                  v-model="detalle.notaSer"
+                  v-model="detalle.Ser"
                 />
               </td>
               <td>
                 <input
                   type="text"
                   placeholder="Saber..."
-                  v-model="detalle.notaSaber"
+                  v-model="detalle.Saber"
                 />
               </td>
                             <td>
                 <input
                   type="text"
                   placeholder="Hacer..."
-                  v-model="detalle.notaHacer"
+                  v-model="detalle.Hacer"
                 />
               </td>
                       <td>
                 <input
                   type="text"
                   placeholder="Decidir..."
-                  v-model="detalle.notaDecidir"
+                  v-model="detalle.Decidir"
                 />
               </td>
               <td v-text="detalle.bimestre"></td>
-
+              
             </tr>
           </tbody>
         </table>
@@ -156,26 +156,14 @@
           <th>Gestion</th>
           <th>Estudiante</th>
           <th>Materia</th>
-          <th>Bimestre</th>
-          <th>Ser</th>
-          <th>Saber</th>
-          <th>Hacer</th>
-          <th>Decidir</th>
-          <th>Total</th>
           <th>Opcion</th>
         </thead>
         <tbody>
           <tr v-for="calificacion in arrayCalificacion" :key="calificacion.id">
             <td v-text="calificacion.id"></td>
             <td v-text="calificacion.Gestion"></td>
-            <td v-text="calificacion.estudiante + calificacion.estuapell">
+            <td v-text="calificacion.Estudiante">
             <td v-text="calificacion.Materia"></td>
-            <td v-text="calificacion.Bimestre"></td>
-            <td v-text="calificacion.Ser"></td>
-            <td v-text="calificacion.Saber"></td>
-            <td v-text="calificacion.Hacer"></td>
-            <td v-text="calificacion.Decidir"></td>
-            <td v-text="calificacion.Ser+calificacion.Saber+calificacion.Hacer+calificacion.Decidir"></td>
             <td>
               <a href="#" @click="modificarCalificacion(calificacion.id)"
                 >Seleccionar</a
@@ -425,6 +413,7 @@ export default {
     guardarCalificacion() {
       let me = this;
       //if(this.validarDatos(this.idEstudiante, this.idCurso, this.fecha, this.arrayDetalle)){
+        console.log(this.idAEstuCurso);
       axios
         .post("/calificacion/registrar", {
           observacion: this.observacion,
@@ -475,11 +464,12 @@ export default {
       let me = this;
       this.arrayCalificacion = [];
 
-      var url = "/calificacion/buscarDet?buscar=" + buscar;
+      var url = "/calificacion?buscar=" + buscar;
       axios
         .get(url)
         .then(function (response) {
           me.arrayCalificacion = response.data;
+          console.log(response.data);
         })
         .catch(function (error) {
           console.log(error);
@@ -498,9 +488,9 @@ export default {
       axios
         .get(url)
         .then(function (response) {
-          arrayCalificacionT = response.data.inscripcion;
+          arrayCalificacionT = response.data;
           me.id = arrayCalificacionT[0].id;
-          console.log(arrayCalificacionT);
+          me.idAEstuCurso = arrayCalificacionT[0].idAEstudianteCurso;
           me.idEstudiante = arrayCalificacionT[0].idAEstudianteCurso;
           me.estudianteNombre = arrayCalificacionT[0].Estudiante;
           me.estudianteApellido = arrayCalificacionT[0].estuapell;
@@ -508,8 +498,8 @@ export default {
           me.cursoGestion = arrayCalificacionT[0].Gestion;
           me.materiaNombre = arrayCalificacionT[0].Materia;
           me.observacion = arrayCalificacionT[0].observacion;
-          console.log(me);
-          console.log(typeof arrayCalificacionT);
+         
+          console.log(arrayCalificacionT[0]);
         })
         .catch(function (error) {
           console.log(error);
@@ -519,14 +509,60 @@ export default {
       axios
         .get(url1)
         .then(function (response) {
-          me.arrayDetalle = response.data.detalle;
+          me.arrayDetalle = response.data;
         })
         .catch(function (error) {
           console.log(error);
         });
     },
 
+        modificar(){
+            let me = this;
+            axios.put('calificacion/eliminarDetalles',{
+                id: this.id
+            }).then(function(error){
+                //
+            }).catch(function(error){
+                console.log(error);
+            }); 
 
+            axios.put('/calificacion/modificar',{
+                observacion: this.observacion,
+                codEstudianteCurso: this.idAEstuCurso, //Asignacion curso Estudiante
+                data: this.arrayDetalle,
+               
+                id : this.id,
+
+            }).then(function (response) {
+                me.respt = 'calificacion Modificada...!';
+            }).catch(function (error) {
+                console.log(error);
+            });        
+        },
+
+
+        eliminar(){
+            let me = this;
+
+            axios.put('calificacion/eliminarDetalles',{
+                id: this.id
+            }).then(function(error){
+                //
+            }).catch(function(error){
+                console.log(error);
+            }); 
+
+
+            axios.put('calificacion/eliminar',{
+              'id': this.id,
+            }).then(function(error){
+                me.listar('');
+            }).catch(function(error){
+                console.log(error);
+            });   
+            
+            this.nuevo();
+        },
   },
   mounted(){
 
